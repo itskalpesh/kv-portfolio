@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Y_z4yFsNNFvHXoPm92LzA"
+uri = "file://artifacts/portfolio/src/assets/project1.png"
+type = "image"
+title = "Abstract dark terminal code UI"
+
+[[generated]]
+id = "iOVIkFie-DMOuNmn1hICL"
+uri = "file://artifacts/portfolio/src/assets/project2.png"
+type = "image"
+title = "Cyberpunk web dashboard abstract"
+
+[[generated]]
+id = "GIQ5bizLnK0PJQErfTmBa"
+uri = "file://artifacts/portfolio/src/assets/project3.png"
+type = "image"
+title = "Abstract 3D network nodes"

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAY 1 — FROM ZERO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Orbitron:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Space Mono', monospace;
+    overflow: hidden;
+  }
+
+  #reel {
+    width: 390px;
+    height: 692px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    flex-shrink: 0;
+  }
+
+  /* ── CANVAS rain ── */
+  #rain { position: absolute; inset: 0; z-index: 0; opacity: 0.18; }
+
+  /* ── Code BG photo ── */
+  #codebg {
+    position: absolute; inset: 0; z-index: 1;
+    background-image: var(--codebg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s;
+    filter: brightness(0.25) saturate(0.4);
+  }
+
+  /* ── scanlines ── */
+  #scanlines {
+    position: absolute; inset: 0; z-index: 2;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.18) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* ── vignette ── */
+  #vignette {
+    position: absolute; inset: 0; z-index: 3;
+    background: radial-gradient(ellipse at center,
+      transparent 35%, rgba(0,0,0,0.75) 100%);
+    pointer-events: none;
+  }
+
+  /* ── top bar ── */
+  #topbar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 20px 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  #topbar.show { opacity: 1; transform: translateY(0); }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #00FF88;
+    text-transform: uppercase;
+    border: 1px solid #00FF8855;
+    padding: 4px 10px;
+    background: rgba(0,255,136,0.06);
+  }
+  .tag-r { color: #ff4d8f; border-color: #ff4d8f55; background: rgba(255,77,143,0.06); }
+
+  /* ── COUNTER ── */
+  #counter {
+    position: absolute; top: 50%; left: 50%; z-index: 10;
+    transform: translate(-50%, -50%) scale(0);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 220px;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -8px;
+    text-shadow: 0 0 80px rgba(0,255,136,0.4);
+    opacity: 0;
+    transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+  }
+  #counter.pop { transform: translate(-50%,-50%) scale(1); opacity: 0.08; }
+
+  /* ── MAIN HEADLINE ── */
+  #headline {
+    position: absolute;
+    top: 38%;
+    left: 0; right: 0;
+    z-index: 10;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 8px;
+    color: #00FF88;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+  }
+  .eyebrow.show { opacity: 1; transform: translateY(0); }
+
+  .day-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    color: #00FF88;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s, transform 0.6s;
+    text-shadow: 0 0 20px #00FF88aa;
+  }
+  .day-label.show { opacity: 1; transform: translateX(0); }
+
+  .hero-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 86px;
+    line-height: 0.9;
+    letter-spacing: 4px;
+    margin: 6px 0;
+    opacity: 0;
+    transform: translateY(30px) skewX(-2deg);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .hero-text.show { opacity: 1; transform: translateY(0) skewX(0deg); }
+
+  .word-from {
+    display: block;
+    color: #fff;
+    text-shadow: 2px 2px 0 #00FF8833;
+  }
+  .word-zero {
+    display: block;
+    -webkit-text-stroke: 2px #00FF88;
+    color: transparent;
+    text-shadow: 0 0 40px #00FF8866;
+  }
+
+  .subline {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #ffffff88;
+    letter-spacing: 3px;
+    margin-top: 12px;
+    opacity: 0;
+    transition: opacity 0.8s 0.3s;
+  }
+  .subline.show { opacity: 1; }
+
+  /* ── ROBOT ── */
+  #robot-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    z-index: 8;
+    width: 220px;
+    text-align: center;
+    transition: transform 1s cubic-bezier(0.34,1.2,0.64,1), opacity 0.8s;
+    opacity: 0;
+  }
+  #robot-wrap.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  #robot-img {
+    width: 220px;
+    filter: drop-shadow(0 0 30px #00FF8866) drop-shadow(0 20px 40px #000);
+    animation: robothover 3s ease-in-out infinite;
+  }
+
+  @keyframes robothover {
+    0%,100% { transform: translateY(0px) rotate(-1deg); }
+    50%      { transform: translateY(-10px) rotate(1deg); }
+  }
+
+  /* ── ROBOT UPLOAD placeholder ── */
+  #robot-placeholder {
+    width: 220px; height: 260px;
+    border: 2px dashed #00FF8844;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    cursor: pointer;
+    border-radius: 8px;
+    color: #00FF8888;
+    font-size: 10px;
+    letter-spacing: 2px;
+    gap: 8px;
+  }
+  #robot-placeholder svg { opacity: 0.5; }
+
+  /* ── STATS ROW ── */
+  #stats {
+    position: absolute;
+    bottom: 90px;
+    left: 20px; right: 20px;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.4s, transform 0.6s 0.4s;
+  }
+  #stats.show { opacity: 1; transform: translateY(0); }
+
+  .stat-box {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 10px 6px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    font-weight: 900;
+    color: #00FF88;
+    letter-spacing: 1px;
+  }
+  .stat-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    color: #ffffff55;
+    letter-spacing: 2px;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── BOTTOM BAR ── */
+  #bottombar {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    padding: 16px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
+    opacity: 0; transition: opacity 0.8s 0.5s;
+  }
+  #bottombar.show { opacity: 1; }
+
+  .progress-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: #00FF8888;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .progress-track {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    width: 100%;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #00FF88, #00ccff);
+    width: 0%;
+    transition: width 2s ease;
+    box-shadow: 0 0 10px #00FF88;
+  }
+
+  /* ── GLITCH ── */
+  @keyframes glitch1 {
+    0%,94%,100% { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+    95% { clip-path: inset(20% 0 60% 0); transform: translateX(-4px); color: #ff4d8f; }
+    97% { clip-path: inset(60% 0 20% 0); transform: translateX(4px); color: #00FF88; }
+  }
+  .glitch {
+    position: relative;
+  }
+  .glitch::before {
+    content: attr(data-text);
+    position: absolute; inset: 0;
+    color: inherit;
+    animation: glitch1 4s steps(1) infinite;
+    font-family: inherit; font-size: inherit; font-weight: inherit;
+    letter-spacing: inherit;
+  }
+
+  /* ── noise overlay ── */
+  #noise {
+    position: absolute; inset: 0; z-index: 15;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 128px;
+  }
+
+  /* ── CURSOR GLOW ── */
+  #cursorGlow {
+    position: absolute; z-index: 20;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%,-50%);
+    transition: left 0.1s, top 0.1s;
+  }
+
+  /* ── UPLOAD BUTTON ── */
+  #uploadBtn {
+    position: fixed;
+    top: 16px; right: 16px;
+    z-index: 100;
+    background: rgba(0,255,136,0.1);
+    border: 1px solid #00FF8866;
+    color: #00FF88;
+    padding: 8px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  #fileInput { display: none; }
+
+  /* ── REPLAY ── */
+  #replayBtn {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid #ffffff22;
+    color: #fff;
+    padding: 8px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  #replayBtn.show { opacity: 1; }
+
+  /* ── GRID LINES ── */
+  #grid {
+    position: absolute; inset: 0; z-index: 2;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── SIDE ACCENTS ── */
+  .side-accent {
+    position: absolute;
+    top: 20%;
+    width: 2px;
+    height: 60%;
+    background: linear-gradient(to bottom, transparent, #00FF8833, transparent);
+    z-index: 6;
+  }
+  .side-accent.left  { left: 16px; }
+  .side-accent.right { right: 16px; }
+
+  /* ── CORNER BRACKETS ── */
+  .corner {
+    position: absolute; z-index: 10;
+    width: 20px; height: 20px;
+    opacity: 0.4;
+  }
+  .corner.tl { top: 12px; left: 12px; border-top: 2px solid #00FF88; border-left: 2px solid #00FF88; }
+  .corner.tr { top: 12px; right: 12px; border-top: 2px solid #00FF88; border-right: 2px solid #00FF88; }
+  .corner.bl { bottom: 12px; left: 12px; border-bottom: 2px solid #00FF88; border-left: 2px solid #00FF88; }
+  .corner.br { bottom: 12px; right: 12px; border-bottom: 2px solid #00FF88; border-right: 2px solid #00FF88; }
+
+  /* ── FLASH ── */
+  #flash {
+    position: absolute; inset: 0; z-index: 25;
+    background: #00FF88;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.1s;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Upload button (outside reel) -->
+<button id="uploadBtn" onclick="document.getElementById('fileInput').click()">📸 Add Robot Image</button>
+<input type="file" id="fileInput" accept="image/*">
+<button id="replayBtn" onclick="replay()">↺ Replay</button>
+
+<div id="reel">
+  <!-- Layers -->
+  <canvas id="rain"></canvas>
+  <div id="codebg"></div>
+  <div id="grid"></div>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <div id="noise"></div>
+  <div id="flash"></div>
+  <div id="cursorGlow"></div>
+
+  <!-- Corners -->
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <!-- Side accents -->
+  <div class="side-accent left"></div>
+  <div class="side-accent right"></div>
+
+  <!-- Top bar -->
+  <div id="topbar">
+    <div class="tag">@YourHandle</div>
+    <div class="tag tag-r">● REC</div>
+  </div>
+
+  <!-- Large BG counter -->
+  <div id="counter">1</div>
+
+  <!-- Main headline -->
+  <div id="headline">
+    <div class="eyebrow" id="eyebrow">Coding Journey</div>
+    <div class="day-label glitch" id="dayLabel" data-text="DAY 001">DAY 001</div>
+    <div class="hero-text" id="heroText">
+      <span class="word-from">FROM</span>
+      <span class="word-zero">ZERO</span>
+    </div>
+    <div class="subline" id="subline">THE GRIND STARTS NOW</div>
+  </div>
+
+  <!-- Robot -->
+  <div id="robot-wrap">
+    <div id="robot-placeholder">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="1.5">
+        <rect x="5" y="5" width="14" height="14" rx="2"/>
+        <circle cx="9" cy="10" r="1.5" fill="#00FF88"/>
+        <circle cx="15" cy="10" r="1.5" fill="#00FF88"/>
+        <path d="M9 14 Q12 16 15 14"/>
+        <path d="M12 5 V2"/>
+        <path d="M5 12 H2M22 12 H19"/>
+      </svg>
+      <span>TAP TO ADD ROBOT</span>
+    </div>
+    <img id="robot-img" src="" alt="" style="display:none;">
+  </div>
+
+  <!-- Stats -->
+  <div id="stats">
+    <div class="stat-box">
+      <div class="stat-num" id="stat1">000</div>
+      <div class="stat-lbl">Lines Written</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat2">00</div>
+      <div class="stat-lbl">Hours Coded</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat3">00</div>
+      <div class="stat-lbl">Commits</div>
+    </div>
+  </div>
+
+  <!-- Bottom progress -->
+  <div id="bottombar">
+    <div class="progress-label">PROGRESS ▸ DAY 1 / 100</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── FILE UPLOAD ──
+const fileInput = document.getElementById('fileInput');
+const robotImg  = document.getElementById('robot-img');
+const placeholder = document.getElementById('robot-placeholder');
+
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  robotImg.src = url;
+  robotImg.style.display = 'block';
+  placeholder.style.display = 'none';
+});
+
+// Auto-load images from uploads if accessible
+(async () => {
+  // Try to use the uploaded robot image
+  try {
+    const uploads = [
+      '/mnt/user-data/uploads/1000004418.png',
+      '/mnt/user-data/uploads/1000004510.jpg'
+    ];
+    // We'll use the images as blobs via fetch isn't possible in static browser
+    // User will manually upload via the button
+  } catch(e) {}
+})();
+
+// Click placeholder to upload
+placeholder.addEventListener('click', () => fileInput.click());
+
+// ── CODE RAIN CANVAS ──
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+const reel = document.getElementById('reel');
+
+function resizeCanvas() {
+  canvas.width  = reel.offsetWidth;
+  canvas.height = reel.offsetHeight;
+}
+resizeCanvas();
+
+const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ01アイウエオ{}[];=>!@#$%'.split('');
+const fontSize = 11;
+const cols = Math.floor(canvas.width / fontSize);
+const drops = Array(cols).fill(1);
+
+function drawRain() {
+  ctx.fillStyle = 'rgba(0,0,0,0.06)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = fontSize + 'px Space Mono, monospace';
+
+  for (let i = 0; i < drops.length; i++) {
+    const char = chars[Math.floor(Math.random() * chars.length)];
+    const brightness = Math.random();
+    if (brightness > 0.95) {
+      ctx.fillStyle = '#fff';
+    } else if (brightness > 0.8) {
+      ctx.fillStyle = '#00FF88';
+    } else {
+      ctx.fillStyle = '#00aa5588';
+    }
+    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(drawRain, 45);
+
+// ── CURSOR GLOW ──
+const glow = document.getElementById('cursorGlow');
+reel.addEventListener('mousemove', e => {
+  const r = reel.getBoundingClientRect();
+  glow.style.left = (e.clientX - r.left) + 'px';
+  glow.style.top  = (e.clientY - r.top)  + 'px';
+});
+
+// ── COUNT-UP ANIMATION ──
+function countUp(el, target, duration, pad = 3) {
+  const start = Date.now();
+  const tick = () => {
+    const p = Math.min((Date.now() - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = String(Math.floor(ease * target)).padStart(pad, '0');
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+// ── FLASH ──
+function flash() {
+  const f = document.getElementById('flash');
+  f.style.opacity = '0.4';
+  setTimeout(() => f.style.opacity = '0', 150);
+}
+
+// ── MAIN TIMELINE ──
+function runTimeline() {
+  // Show code BG
+  document.getElementById('codebg').style.opacity = '1';
+
+  // t=300: top bar
+  setTimeout(() => document.getElementById('topbar').classList.add('show'), 300);
+
+  // t=500: big counter pop
+  setTimeout(() => document.getElementById('counter').classList.add('pop'), 500);
+
+  // t=700: eyebrow
+  setTimeout(() => document.getElementById('eyebrow').classList.add('show'), 700);
+
+  // t=900: day label
+  setTimeout(() => document.getElementById('dayLabel').classList.add('show'), 900);
+
+  // t=1200: hero text + flash
+  setTimeout(() => {
+    flash();
+    document.getElementById('heroText').classList.add('show');
+  }, 1200);
+
+  // t=1600: subline
+  setTimeout(() => document.getElementById('subline').classList.add('show'), 1600);
+
+  // t=1800: robot entrance
+  setTimeout(() => document.getElementById('robot-wrap').classList.add('show'), 1800);
+
+  // t=2200: stats
+  setTimeout(() => {
+    document.getElementById('stats').classList.add('show');
+    countUp(document.getElementById('stat1'), 0, 1000, 3);
+    countUp(document.getElementById('stat2'), 0, 800, 2);
+    countUp(document.getElementById('stat3'), 0, 600, 2);
+  }, 2200);
+
+  // t=2600: bottom bar + progress
+  setTimeout(() => {
+    document.getElementById('bottombar').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('progressFill').style.width = '1%';
+    }, 300);
+  }, 2600);
+
+  // t=3200: replay button
+  setTimeout(() => document.getElementById('replayBtn').classList.add('show'), 3200);
+}
+
+function replay() {
+  // Reset all
+  ['topbar','eyebrow','dayLabel','heroText','subline','stats','bottombar']
+    .forEach(id => document.getElementById(id).classList.remove('show'));
+  document.getElementById('counter').classList.remove('pop');
+  document.getElementById('robot-wrap').classList.remove('show');
+  document.getElementById('replayBtn').classList.remove('show');
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressFill').style.transition = 'none';
+  document.getElementById('stat1').textContent = '000';
+  document.getElementById('stat2').textContent = '00';
+  document.getElementById('stat3').textContent = '00';
+  setTimeout(() => {
+    document.getElementById('progressFill').style.transition = 'width 2s ease';
+    runTimeline();
+  }, 400);
+}
+
+// ── START ──
+window.addEventListener('load', () => setTimeout(runTimeline, 400));
+</script>
+</body>
+</html>
