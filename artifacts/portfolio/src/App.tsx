@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence, useAnimation } from "framer-motion";
-import { Github, Twitter, Mail, ExternalLink, Terminal, ChevronDown, Copy, CheckCircle2, FileCode2, Database, Layout, Laptop, GraduationCap, MapPin, Phone, Instagram, Sun, Moon, ArrowUp, Menu, X, Code2 } from "lucide-react";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { Github, Linkedin, Mail, ExternalLink, Terminal, ChevronDown, Copy, CheckCircle2, FileCode2, Database, Layout, Laptop, GraduationCap, MapPin, Phone, Instagram, Sun, Moon, ArrowUp, Menu, Code2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Toaster, toast } from "sonner";
@@ -11,15 +11,14 @@ import robotImg from "@assets/Picsart_26-04-20_21-47-46-924_1776771781463.png";
 import studyNotesImg from "./assets/study-notes-mockup.png";
 
 // Premium easing
-const EASE = [0.22, 1, 0.36, 1];
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [activeSection, setActiveSection] = useState("hero");
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const { scrollYProgress, scrollY } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const { scrollYProgress } = useScroll();
   const springScroll = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
@@ -220,7 +219,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 glass-panel px-4 py-2 rounded-full w-fit border-primary/20 bg-background/50 cursor-hover-target"
             >
               <span className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-              <span className="font-mono text-[10px] text-foreground uppercase tracking-widest font-bold">Available for Work · 2025</span>
+              <span className="font-mono text-[10px] text-foreground uppercase tracking-widest font-bold">Available for Work - 2026</span>
             </motion.div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1]">
@@ -317,7 +316,7 @@ export default function Home() {
                   <Terminal size={14} /> // Identity
                 </h2>
                 <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-                  <span className="text-foreground/60">I am</span> Kalpesh.
+                  <span className="text-foreground/60">I am</span> Kalpesh Kurbetti.
                 </h3>
               </div>
               
@@ -369,6 +368,14 @@ export default function Home() {
                     <p className="inline-block px-3 py-1 bg-primary/10 text-primary font-mono text-xs font-bold rounded-full mb-4">2nd Year (Ongoing)</p>
                     <p className="text-foreground/60 text-lg">VSM BCA College<br/>Nipani, Karnataka</p>
                   </div>
+                  <div className="relative">
+                    <div className="absolute -left-[43px] top-1 w-6 h-6 rounded-full bg-background border-2 border-primary flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                    </div>
+                    <h4 className="text-2xl font-bold mb-2">Pre-University Course (Science)</h4>
+                    <p className="inline-block px-3 py-1 bg-primary/10 text-primary font-mono text-xs font-bold rounded-full mb-4">Completed</p>
+                    <p className="text-foreground/60 text-lg">VSM PUC College<br/>Nipani, Karnataka</p>
+                  </div>
                 </div>
               </SpotlightCard>
             </motion.div>
@@ -393,7 +400,7 @@ export default function Home() {
                   <Terminal size={14} /> // Languages Known
                 </h2>
                 <div className="flex gap-6">
-                  {["Kannada", "English", "Hindi"].map((lang, i) => (
+                  {["English", "Hindi"].map((lang, i) => (
                     <span key={i} className="text-foreground/70 font-mono font-bold tracking-wider">{lang}</span>
                   ))}
                 </div>
@@ -447,10 +454,10 @@ export default function Home() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
-              { title: "Languages", icon: <FileCode2 className="text-primary mb-6" size={32} strokeWidth={1.5} />, items: ["Python", "Java", "C", "C++"] },
+              { title: "Languages", icon: <FileCode2 className="text-primary mb-6" size={32} strokeWidth={1.5} />, items: ["Python", "Java", "C", "C++", "PHP", "Shell Script"] },
               { title: "Web Tech", icon: <Layout className="text-accent mb-6" size={32} strokeWidth={1.5} />, items: ["HTML5", "CSS3", "JavaScript"] },
               { title: "Database", icon: <Database className="text-primary mb-6" size={32} strokeWidth={1.5} />, items: ["SQL", "MySQL"] },
-              { title: "Tools", icon: <Laptop className="text-foreground/70 mb-6" size={32} strokeWidth={1.5} />, items: ["MS Word", "MS Excel", "MS PowerPoint"] }
+              { title: "Tools", icon: <Laptop className="text-foreground/70 mb-6" size={32} strokeWidth={1.5} />, items: ["MS Word", "MS Excel", "MS PowerPoint", "Git & GitHub", "VS Code", "Photoshop"] }
             ].map((category, i) => (
               <motion.div key={i} variants={fadeUpVariant}>
                 <SpotlightCard className="p-8 rounded-[2rem] h-full hover:-translate-y-2 transition-transform duration-300 group cursor-hover-target">
@@ -581,9 +588,9 @@ export default function Home() {
               
               <div className="flex justify-center gap-4 mt-16">
                 <SocialLink href="tel:9743285441" icon={<Phone size={20} />} ariaLabel="Phone" />
-                <SocialLink href="#" icon={<Instagram size={20} />} ariaLabel="Instagram" />
-                <SocialLink href="#" icon={<Github size={20} />} ariaLabel="GitHub" />
-                <SocialLink href="#" icon={<Twitter size={20} />} ariaLabel="Twitter" />
+                <SocialLink href="https://www.instagram.com/kv.coder/" icon={<Instagram size={20} />} ariaLabel="Instagram" />
+                <SocialLink href="https://github.com/itskalpesh" icon={<Github size={20} />} ariaLabel="GitHub" />
+                <SocialLink href="#" icon={<Linkedin size={20} />} ariaLabel="LinkedIn" />
               </div>
             </SpotlightCard>
           </motion.div>
@@ -595,7 +602,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3 font-mono text-sm font-bold">
             <span className="text-primary">KV.CODER.</span>
-            <span className="text-muted-foreground">© {new Date().getFullYear()}</span>
+            <span className="text-muted-foreground">Copyright {new Date().getFullYear()}</span>
           </div>
           
           <div className="flex items-center gap-6">
@@ -628,7 +635,7 @@ export default function Home() {
 
 // ---------------- Components ---------------- //
 
-const skillsList = ["Python", "Java", "C", "C++", "HTML5", "CSS3", "JavaScript", "SQL", "MySQL", "React", "Tailwind", "Git"];
+const skillsList = ["Python", "Java", "C", "C++", "PHP", "Shell Script", "HTML5", "CSS3", "JavaScript", "SQL", "MySQL", "React", "Tailwind", "Git", "VS Code"];
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
