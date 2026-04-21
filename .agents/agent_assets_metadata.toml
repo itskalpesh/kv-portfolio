@@ -18,3 +18,9 @@ id = "GIQ5bizLnK0PJQErfTmBa"
 uri = "file://artifacts/portfolio/src/assets/project3.png"
 type = "image"
 title = "Abstract 3D network nodes"
+
+[[generated]]
+id = "Qu9Dg15aQMz5dRsaUI8v7"
+uri = "file://artifacts/portfolio/src/assets/study-notes-mockup.png"
+type = "image"
+title = "Study Notes web app mockup"
