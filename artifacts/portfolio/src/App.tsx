@@ -230,7 +230,7 @@ export default function Home() {
               </TextReveal>
             </h1>
             
-            <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: 1 }} className="text-xl md:text-2xl font-mono text-muted-foreground">
+            <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: 1 }} className="text-xl md:text-2xl font-mono text-foreground/80">
               Aspiring Software Developer
             </motion.h2>
             
@@ -240,8 +240,8 @@ export default function Home() {
             
             <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="flex gap-4 pt-6">
               <MagneticButton>
-                <button onClick={() => scrollTo("projects")} className="glass-button text-foreground px-8 py-4 font-mono font-bold uppercase tracking-wider hover:bg-primary/10 transition-all rounded-lg flex items-center gap-2 cursor-hover-target">
-                  View Output <ChevronDown size={16} className="text-primary" />
+                <button onClick={() => scrollTo("projects")} className="bg-foreground text-background px-8 py-4 font-mono font-bold uppercase tracking-wider hover:opacity-90 transition-all rounded-lg flex items-center gap-2 cursor-hover-target shadow-lg">
+                  View Output <ChevronDown size={16} />
                 </button>
               </MagneticButton>
             </motion.div>
@@ -271,7 +271,7 @@ export default function Home() {
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">Scroll</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/70">Scroll</span>
           <div className="w-[1px] h-16 bg-gradient-to-b from-foreground/30 to-transparent" />
         </motion.div>
       </section>
@@ -292,11 +292,10 @@ export default function Home() {
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <Tilt3D>
                 <div className="glass-panel p-2 rounded-2xl relative overflow-hidden aspect-[3/4] group cursor-hover-target">
-                  <div className="absolute inset-0 bg-primary/5 mix-blend-overlay z-10" />
                   <img 
                     src={portraitImg} 
                     alt="Kalpesh Kurbetti" 
-                    className="w-full h-full object-cover rounded-xl filter grayscale-[0.8] contrast-110 brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+                    className="w-full h-full object-cover rounded-xl saturate-110 group-hover:scale-105 transition-transform duration-1000 ease-out"
                   />
                   <div className="absolute bottom-6 left-6 right-6 z-20">
                     <div className="glass-panel p-4 rounded-xl flex items-center justify-between border-white/10 bg-black/40 backdrop-blur-md">
@@ -318,7 +317,7 @@ export default function Home() {
                   <Terminal size={14} /> // Identity
                 </h2>
                 <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-                  <span className="text-foreground/40">I am</span> Kalpesh.
+                  <span className="text-foreground/60">I am</span> Kalpesh.
                 </h3>
               </div>
               
@@ -451,7 +450,7 @@ export default function Home() {
               { title: "Languages", icon: <FileCode2 className="text-primary mb-6" size={32} strokeWidth={1.5} />, items: ["Python", "Java", "C", "C++"] },
               { title: "Web Tech", icon: <Layout className="text-accent mb-6" size={32} strokeWidth={1.5} />, items: ["HTML5", "CSS3", "JavaScript"] },
               { title: "Database", icon: <Database className="text-primary mb-6" size={32} strokeWidth={1.5} />, items: ["SQL", "MySQL"] },
-              { title: "Tools", icon: <Laptop className="text-foreground/50 mb-6" size={32} strokeWidth={1.5} />, items: ["MS Word", "MS Excel", "MS PowerPoint"] }
+              { title: "Tools", icon: <Laptop className="text-foreground/70 mb-6" size={32} strokeWidth={1.5} />, items: ["MS Word", "MS Excel", "MS PowerPoint"] }
             ].map((category, i) => (
               <motion.div key={i} variants={fadeUpVariant}>
                 <SpotlightCard className="p-8 rounded-[2rem] h-full hover:-translate-y-2 transition-transform duration-300 group cursor-hover-target">
