@@ -6,11 +6,11 @@ Professional portfolio website for **Kalpesh Kurbetti**, an aspiring software de
 
 ## Live Demo
 
-**Portfolio:** https://itskalpesh.github.io/kv-portfolio/
+**Portfolio:** 
 
 If the link is not live yet, GitHub Pages may still be deploying from the latest workflow run.
 
-## Highlights
+## Highlights  https://itskv-portfolio.netlify.app/
 
 - Modern responsive portfolio UI
 - Dark and light mode support
