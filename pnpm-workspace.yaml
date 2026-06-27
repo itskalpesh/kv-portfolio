@@ -1,6 +1,9 @@
 packages:
   - artifacts/portfolio
 
+allowBuilds:
+  esbuild: set this to true or false
+
 catalog:
   '@tailwindcss/vite': ^4.1.14
   '@types/node': ^25.3.3
