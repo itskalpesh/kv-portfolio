@@ -6,8 +6,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Toaster, toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-import portraitImg from "@assets/Picsart_26-04-19_06-43-29-070_1776771771515.jpg";
-import robotImg from "@assets/Picsart_26-04-20_21-47-46-924_1776771781463.png";
+import portraitImg from "@/assets/Picsart_26-04-19_06-43-29-070_1776771771515.jpg";
+import robotImg from "@/assets/Picsart_26-04-20_21-47-46-924_1776771781463.png";
 import studyNotesImg from "./assets/study-notes-mockup.png";
 
 // Premium easing
