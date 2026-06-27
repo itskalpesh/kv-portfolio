@@ -2,10 +2,10 @@
   "name": "workspace",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {
-    "dev": "corepack pnpm --filter @workspace/portfolio dev",
-    "build": "corepack pnpm --filter @workspace/portfolio build",
-    "typecheck": "corepack pnpm --filter @workspace/portfolio typecheck"
+    "scripts": {
+    "dev": "pnpm --filter @workspace/portfolio dev",
+    "build": "pnpm --filter @workspace/portfolio build",
+    "typecheck": "pnpm --filter @workspace/portfolio typecheck"
   },
   "private": true,
   "devDependencies": {
