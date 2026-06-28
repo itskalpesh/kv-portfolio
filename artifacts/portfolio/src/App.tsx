@@ -844,7 +844,7 @@ function ProjectModal({ children }: { children: React.ReactNode }) {
               </div>
               
               <div className="pt-6 border-t border-border">
-                <a href="#" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors cursor-hover-target">
+                <a href="https://itskalpesh.github.io/study-notes-site/" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors cursor-hover-target">
                   View Live Site <ExternalLink size={16} />
                 </a>
               </div>
