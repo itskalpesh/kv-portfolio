@@ -2094,8 +2094,8 @@ function AdminPanelModal({
       return;
     }
 
-    const owner = (localStorage.getItem("kv_github_owner") || githubOwner || "itskalpesh").trim();
-    const repo = (localStorage.getItem("kv_github_repo") || githubRepo || "kv-portfolio").trim();
+    const owner = (getSecureLocalItem("kv_github_owner", githubOwner) || "itskalpesh").trim();
+    const repo = (getSecureLocalItem("kv_github_repo", githubRepo) || "kv-portfolio").trim();
     
     // File target path inside repository
     const filePath = "portfolioData.json";
