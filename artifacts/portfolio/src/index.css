@@ -1,0 +1,316 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --font-display: var(--app-font-display);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Ultra-Readable High-Contrast Light Theme */
+  color-scheme: light;
+  --background: 210 20% 98%; /* Clean crisp cool slate background */
+  --foreground: 222 47% 11%; /* Ultra-readable dark slate text */
+  --border: 214 25% 85%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 214 25% 85%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 214 25% 85%;
+  
+  /* High Contrast Emerald Teal & Pink Magenta */
+  --primary: 168 85% 32%; /* Deep high-contrast teal for light mode */
+  --primary-foreground: 0 0% 100%;
+  --accent: 326 100% 45%; /* High-contrast pink for light mode */
+  --accent-foreground: 0 0% 100%;
+  
+  --secondary: 214 20% 92%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 214 20% 92%;
+  --muted-foreground: 215 25% 32%; /* High readability muted text */
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 214 25% 85%;
+  --ring: 168 85% 32%;
+
+  --app-font-sans: 'Plus Jakarta Sans', sans-serif;
+  --app-font-display: 'Space Grotesk', sans-serif;
+  --app-font-mono: 'Space Mono', monospace;
+  
+  --radius: 1rem; 
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --border: 240 5% 16%;
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 98%;
+  --card-border: 240 5% 16%;
+  --popover: 240 10% 6%;
+  --popover-foreground: 0 0% 98%;
+  --popover-border: 240 5% 16%;
+  
+  --primary: 167 100% 50%;
+  --primary-foreground: 240 10% 4%;
+  --secondary: 240 10% 12%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 10% 16%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 320 100% 60%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 240 5% 16%;
+  --ring: 167 100% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden transition-colors duration-500;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+  
+  .dark .glass-panel {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  
+  .glass-button {
+    background: rgba(13, 148, 136, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(13, 148, 136, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    color: hsl(var(--primary));
+  }
+  
+  .dark .glass-button {
+    background: linear-gradient(135deg, rgba(0,255,200,0.1), rgba(0,255,200,0.02));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 20px -10px rgba(0,0,0,0.5);
+    color: hsl(var(--primary));
+  }
+
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent;
+  }
+  
+  /* Grid Background */
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+  
+  .dark .bg-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  /* Radial Spotlight Hover */
+  .spotlight-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight-hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      rgba(0, 255, 200, 0.1),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .spotlight-hover:hover::before {
+    opacity: 1;
+  }
+  
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Background animated blobs */
+@keyframes blob1 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+@keyframes blob2 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(-30px, 50px) scale(0.9); }
+  66% { transform: translate(20px, -20px) scale(1.1); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.bg-blob-1 {
+  animation: blob1 20s infinite ease-in-out;
+}
+.bg-blob-2 {
+  animation: blob2 25s infinite ease-in-out;
+}
+
+/* 3D Robot & DP Photo Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.perspective-800 { perspective: 800px; }
+.perspective-1000 { perspective: 1000px; }
+.perspective-1200 { perspective: 1200px; }
+
+.translate-z-10 { transform: translateZ(10px); }
+.translate-z-20 { transform: translateZ(20px); }
+.translate-z-30 { transform: translateZ(30px); }
+.translate-z-40 { transform: translateZ(40px); }
+.translate-z-50 { transform: translateZ(50px); }
+.translate-z-60 { transform: translateZ(60px); }
+.translate-z-80 { transform: translateZ(80px); }
+
+.robo-3d-shadow {
+  box-shadow: 
+    0 35px 80px -15px rgba(0, 255, 200, 0.25),
+    0 20px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.photo-3d-card {
+  box-shadow:
+    0 30px 60px -15px rgba(0, 0, 0, 0.3),
+    0 15px 35px -10px rgba(236, 72, 153, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes orbitRotate {
+  0% { transform: rotateX(65deg) rotateZ(0deg); }
+  100% { transform: rotateX(65deg) rotateZ(360deg); }
+}
+
+@keyframes orbitReverse {
+  0% { transform: rotateX(-45deg) rotateZ(360deg); }
+  100% { transform: rotateX(-45deg) rotateZ(0deg); }
+}
+
+.orbit-ring-1 {
+  animation: orbitRotate 18s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.orbit-ring-2 {
+  animation: orbitReverse 22s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* 3D Scroll Perspective Container */
+.scroll-3d-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Cyberpunk Hacker Terminal Scanlines & Glitch */
+.hacker-scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 255, 200, 0.05) 50%,
+    rgba(0, 255, 200, 0.05)
+  );
+  background-size: 100% 4px;
+}
+
+.hacker-text-glow {
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.8), 0 0 20px rgba(0, 255, 200, 0.4);
+}
+
+/* Liquid Morph Navigation Utility */
+@keyframes liquidMorph {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.liquid-morph-btn {
+  animation: liquidMorph 8s ease-in-out infinite;
+  box-shadow: 0 10px 30px -5px rgba(0, 255, 200, 0.3);
+}
+
+
+
