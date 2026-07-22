@@ -1,0 +1,98 @@
+{
+  "projects": [
+    {
+      "id": "study-notes",
+      "title": "Study Notes Website",
+      "category": "Web Development",
+      "url": "itskalpesh.github.io/study-notes-site",
+      "image": "/src/assets/study-notes-mockup.png",
+      "description": "Comprehensive web platform built for students to access, organize, and share study notes. Features clean responsive UI, interactive navigation, and subject/topic categorization.",
+      "tags": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Responsive UI"
+      ],
+      "liveLink": "https://itskalpesh.github.io/study-notes-site/"
+    },
+    {
+      "id": "devcraft-hub",
+      "title": "DevCraft Code Playground",
+      "category": "Frontend & UI Engineering",
+      "url": "devcraft.kvcoder.dev",
+      "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0f19'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23141a29' stroke='%2300ffc8' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>DevCraft Snippets Studio</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Interactive UI Component &amp; Palette Generator</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>⚡ Live Preview Active</text></svg>",
+      "description": "Interactive developer environment for building component previews, managing snippet collections, and experimenting with real-time CSS gradients and animations.",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion"
+      ],
+      "liveLink": "https://itskv-portfolio.netlify.app/"
+    },
+    {
+      "id": "bca-portal",
+      "title": "BCA Academic Resource Hub",
+      "category": "Full Stack & Database",
+      "url": "bca-portal.kvcoder.dev",
+      "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23090d16'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23111827' stroke='%23ec4899' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%23ec4899' text-anchor='middle'>BCA Academic Hub</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Syllabus Tracking &amp; Practical Lab Repository</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%23ec4899' text-anchor='middle'>📚 Academic System</text></svg>",
+      "description": "Academic management portal designed to streamline practical lab programs, C/C++/Java assignments, and syllabus tracking for BCA computer science students.",
+      "tags": [
+        "Python",
+        "PHP",
+        "MySQL",
+        "Web API"
+      ],
+      "liveLink": "https://itskv-portfolio.netlify.app/"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "web-dev-cert",
+      "title": "Full-Stack Web Development Fundamentals",
+      "issuer": "Coursera / Meta Developer Network",
+      "year": "2025",
+      "description": "Certified proficiency in modern web development principles, covering HTML5, CSS3, JavaScript ES6+, responsive design patterns, and frontend architecture.",
+      "skills": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Responsive UI"
+      ],
+      "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23080d1a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%2311192e' stroke='%2300ffc8' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%2300ffc8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Full-Stack Web Development</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%2300ffc8' text-anchor='middle'>Coursera / Meta Developer Network • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%2300ffc8' fill-opacity='0.1' stroke='%2300ffc8'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    },
+    {
+      "id": "python-cert",
+      "title": "Python Programming & Problem Solving",
+      "issuer": "Infosys Springboard / HackerRank",
+      "year": "2025",
+      "description": "Demonstrated core expertise in Python object-oriented programming, data structures, algorithm logic, and script automation.",
+      "skills": [
+        "Python",
+        "OOP",
+        "Data Structures",
+        "Algorithms"
+      ],
+      "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0d18'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23151829' stroke='%23ec4899' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%23ec4899' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Python Programming Certification</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%23ec4899' text-anchor='middle'>Infosys Springboard / HackerRank • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%23ec4899' fill-opacity='0.1' stroke='%23ec4899'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%23ec4899' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    },
+    {
+      "id": "db-sql-cert",
+      "title": "Database Management & SQL Systems",
+      "issuer": "NPTEL / Oracle Academy",
+      "year": "2024",
+      "description": "Practical certification in relational database management systems, complex SQL queries, database normalization, and MySQL transaction administration.",
+      "skills": [
+        "SQL",
+        "MySQL",
+        "Relational DB",
+        "Schema Design"
+      ],
+      "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%2308101a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23101c2e' stroke='%233b82f6' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%233b82f6' fill-opacity='0.15' stroke='%233b82f6' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%233b82f6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>RDBMS &amp; SQL Mastery</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%233b82f6' text-anchor='middle'>NPTEL / Oracle Academy • 2024</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%233b82f6' fill-opacity='0.1' stroke='%233b82f6'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%233b82f6' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    }
+  ],
+  "adminConfig": {
+    "customUser": "coder",
+    "customPass": "c@der1301"
+  },
+  "syncedAt": "2026-07-22T15:41:41.696Z"
+}
