@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail, ExternalLink, Terminal, ChevronDown, ChevronUp, Copy, CheckCircle2, FileCode2, Database, Layout, Laptop, GraduationCap, MapPin, Phone, Instagram, Sun, Moon, ArrowUp, ArrowDown, Menu, Code2, Lock, Unlock, Plus, Trash2, Edit3, ShieldCheck, KeyRound, X, Check, Bot, Sparkles, Send, MessageSquare, Wand2, Upload, Image, Mic, MicOff, Volume2, VolumeX, FolderGit2 } from "lucide-react";
+import { motion, useScroll, useSpring, useTransform, AnimatePresence, useDragControls } from "framer-motion";
+import { Github, Linkedin, Mail, ExternalLink, Terminal, ChevronDown, ChevronUp, Copy, CheckCircle2, FileCode2, Database, Layout, Laptop, GraduationCap, MapPin, Phone, Instagram, Sun, Moon, ArrowUp, ArrowDown, Menu, Code2, Lock, Unlock, Plus, Trash2, Edit3, ShieldCheck, KeyRound, X, Check, Bot, Sparkles, Send, MessageSquare, Wand2, Upload, Image, Mic, MicOff, Volume2, VolumeX, FolderGit2, GripHorizontal } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Toaster, toast } from "sonner";
@@ -2808,6 +2808,7 @@ const playCyberBeep = (freq = 880, type: OscillatorType = "sine", duration = 0.1
 };
 
 function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string) => void; projects: ProjectItem[]; certificates: CertificateItem[] }) {
+  const panelDragControls = useDragControls();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isMuted, setIsMuted] = useState(false);
@@ -3114,18 +3115,26 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
         </button>
       </motion.div>
 
-      {/* AI Chat & Voice Command Modal Window */}
+      {/* AI Chat & Voice Command Modal Window (Draggable Anywhere on Site) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            drag
+            dragControls={panelDragControls}
+            dragListener={false}
+            dragMomentum={false}
             initial={{ opacity: 0, y: 40, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-28 left-6 sm:left-8 z-50 w-[90vw] sm:w-[400px] max-h-[540px] rounded-3xl glass-panel border border-primary/40 bg-black/90 text-foreground flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden"
+            className="fixed bottom-28 left-6 sm:left-8 z-50 w-[90vw] sm:w-[400px] max-h-[540px] rounded-3xl glass-panel border border-primary/40 bg-black/90 text-foreground flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden touch-none"
           >
-            {/* Header */}
-            <div className="p-4 border-b border-primary/30 flex items-center justify-between bg-primary/10">
+            {/* Header (Drag Handle to move chat box anywhere) */}
+            <div 
+              onPointerDown={(e) => panelDragControls.start(e)}
+              className="p-4 border-b border-primary/30 flex items-center justify-between bg-primary/10 cursor-grab active:cursor-grabbing select-none"
+              title="Hold & Drag to move AI Chat Panel anywhere on screen"
+            >
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-primary/20 text-primary border border-primary/30">
                   <Sparkles size={18} />
@@ -3136,12 +3145,13 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary uppercase">VOICE OMNI</span>
                   </h4>
                   <p className="text-[10px] text-muted-foreground font-mono flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> Drag Orb Anywhere • Voice Talk
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> ✋ Hold & Drag Panel Anywhere
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
+                <GripHorizontal size={18} className="text-primary/60 animate-pulse mr-1" />
                 <button 
                   onClick={() => setIsMuted(!isMuted)} 
                   className={cn("p-1.5 rounded-xl border transition-colors", isMuted ? "bg-muted text-muted-foreground border-border" : "bg-primary/20 text-primary border-primary/40")}
