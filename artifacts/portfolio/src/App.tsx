@@ -2011,7 +2011,8 @@ function AdminPanelModal({
         issuer: certForm.issuer || "Issuing Body",
         year: certForm.year || "2026",
         description: certForm.description || "",
-        skills: skillsArray
+        skills: skillsArray,
+        image: certForm.image || undefined
       };
       onSaveCertificates([newCert, ...certificates]);
       toast.success("New Certificate added!");
@@ -2511,6 +2512,26 @@ function AdminPanelModal({
                     value={certForm.image || ""} 
                     onChange={(val) => setCertForm({ ...certForm, image: val })} 
                   />
+                  <input 
+                    type="text" 
+                    placeholder="Image URL or SVG Badge Data (Optional Manual Input)" 
+                    value={certForm.image || ""} 
+                    onChange={(e) => setCertForm({ ...certForm, image: e.target.value })}
+                    className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary w-full"
+                  />
+                  {/* Preset Certificate Badge Buttons */}
+                  <div className="flex flex-wrap gap-2 items-center text-xs font-mono pt-1">
+                    <span className="text-muted-foreground font-bold">Badge Presets:</span>
+                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23080d1a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%2311192e' stroke='%2300ffc8' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%2300ffc8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Full-Stack Web Development</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%2300ffc8' text-anchor='middle'>Coursera / Meta Developer Network • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%2300ffc8' fill-opacity='0.1' stroke='%2300ffc8'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-bold">
+                      🌐 Web Dev Badge
+                    </button>
+                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0d18'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23151829' stroke='%23ec4899' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%23ec4899' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Python Programming Certification</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%23ec4899' text-anchor='middle'>Infosys Springboard / HackerRank • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%23ec4899' fill-opacity='0.1' stroke='%23ec4899'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%23ec4899' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-pink-500/10 text-pink-400 border border-pink-500/20 hover:bg-pink-500/20 font-bold">
+                      🐍 Python Badge
+                    </button>
+                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%2308101a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23101c2e' stroke='%233b82f6' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%233b82f6' fill-opacity='0.15' stroke='%233b82f6' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%233b82f6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>RDBMS &amp; SQL Mastery</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%233b82f6' text-anchor='middle'>NPTEL / Oracle Academy • 2024</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%233b82f6' fill-opacity='0.1' stroke='%233b82f6'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%233b82f6' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 font-bold">
+                      🛢️ SQL Badge
+                    </button>
+                  </div>
                   <textarea 
                     placeholder="Certificate Description" 
                     rows={3}
