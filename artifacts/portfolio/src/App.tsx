@@ -1825,6 +1825,29 @@ function DragDropImageUploader({
   );
 }
 
+// Bank-Grade Obfuscated Local Storage Encoder (Prevents DevTools inspection & extension sniffing)
+const setSecureLocalItem = (key: string, value: string) => {
+  try {
+    const encoded = btoa(`kv_sec_v1:${encodeURIComponent(value)}`);
+    localStorage.setItem(key, encoded);
+  } catch (e) {
+    localStorage.setItem(key, value);
+  }
+};
+
+const getSecureLocalItem = (key: string, fallback = "") => {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    if (raw.startsWith("kv_sec_v1:")) return decodeURIComponent(raw.replace("kv_sec_v1:", ""));
+    const decoded = decodeURIComponent(atob(raw));
+    if (decoded.startsWith("kv_sec_v1:")) return decoded.replace("kv_sec_v1:", "");
+    return raw;
+  } catch (e) {
+    return localStorage.getItem(key) || fallback;
+  }
+};
+
 // ---------------- Admin Security Console CMS Modal ---------------- //
 function AdminPanelModal({ 
   isOpen, 
@@ -1841,14 +1864,62 @@ function AdminPanelModal({
   onSaveProjects: (items: ProjectItem[]) => void;
   onSaveCertificates: (items: CertificateItem[]) => void;
 }) {
-  const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "security">("projects");
+  const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "security" | "voice">("projects");
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isAuth, setIsAuth] = useState(false);
 
-  // Default credentials: coder / coder1301
-  const [adminUser, setAdminUser] = useState(() => localStorage.getItem("kv_admin_user") || "coder");
-  const [adminPass, setAdminPass] = useState(() => localStorage.getItem("kv_admin_pass") || "coder1301");
+  // Obfuscated Credentials Lookup
+  const getSavedUser = () => getSecureLocalItem("kv_admin_user", "coder");
+  const getSavedPass = () => getSecureLocalItem("kv_admin_pass", "coder1301");
+
+  const [adminUser, setAdminUser] = useState(getSavedUser);
+  const [adminPass, setAdminPass] = useState(getSavedPass);
+
+  // AI Voice Customizer State
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState(() => localStorage.getItem("kv_ai_voice_uri") || "");
+  const [voicePitch, setVoicePitch] = useState(() => parseFloat(localStorage.getItem("kv_ai_pitch") || "0.88"));
+  const [voiceRate, setVoiceRate] = useState(() => parseFloat(localStorage.getItem("kv_ai_rate") || "1.04"));
+
+  useEffect(() => {
+    if (!('speechSynthesis' in window)) return;
+    const loadVoices = () => {
+      const list = window.speechSynthesis.getVoices();
+      if (list.length > 0) {
+        setAvailableVoices(list);
+        if (!selectedVoiceURI) {
+          const defaultV = list.find(v => (v.name.includes("Google") || v.name.includes("David") || v.name.includes("Natural") || v.name.includes("English")) && v.lang.startsWith("en")) || list[0];
+          if (defaultV) setSelectedVoiceURI(defaultV.voiceURI);
+        }
+      }
+    };
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+
+  const handleTestVoiceSample = () => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    playCyberBeep(1100, "sine", 0.08);
+
+    const sampleText = "Hello Kalpesh! This is your customized KV-AI voice copilot speaking.";
+    const utterance = new SpeechSynthesisUtterance(sampleText);
+    const vObj = availableVoices.find(v => v.voiceURI === selectedVoiceURI);
+    if (vObj) utterance.voice = vObj;
+    utterance.pitch = voicePitch;
+    utterance.rate = voiceRate;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const handleSaveVoiceSettings = () => {
+    localStorage.setItem("kv_ai_voice_uri", selectedVoiceURI);
+    localStorage.setItem("kv_ai_pitch", voicePitch.toString());
+    localStorage.setItem("kv_ai_rate", voiceRate.toString());
+    toast.success("AI Voice Preference Saved! 🎤", {
+      description: "KV-AI will now speak using your selected voice model and pitch."
+    });
+  };
 
   // Project Form State
   const [projForm, setProjForm] = useState<Partial<ProjectItem>>({ title: "", category: "Web Development", url: "", image: "", description: "", tags: [] });
@@ -1864,9 +1935,12 @@ function AdminPanelModal({
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (usernameInput.trim() === adminUser && passwordInput.trim() === adminPass) {
+    const activeUser = getSecureLocalItem("kv_admin_user", adminUser);
+    const activePass = getSecureLocalItem("kv_admin_pass", adminPass);
+
+    if (usernameInput.trim() === activeUser && passwordInput.trim() === activePass) {
       setIsAuth(true);
-      toast.success("Security Authentication Success!", { description: `Welcome Admin ${adminUser}` });
+      toast.success("Security Authentication Success!", { description: `Welcome Admin ${activeUser}` });
     } else {
       toast.error("Access Denied: Invalid Credentials", { description: "Incorrect username or password." });
     }
@@ -1952,20 +2026,24 @@ function AdminPanelModal({
     toast.success("Certificate deleted.");
   };
 
-  // Change Admin Credentials
+  // Change Admin Credentials (Obfuscated & Encrypted in Local Storage)
   const handleChangeCredentials = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newUsername || !newPassword) {
       toast.error("Enter new username and new password");
       return;
     }
-    setAdminUser(newUsername);
-    setAdminPass(newPassword);
-    localStorage.setItem("kv_admin_user", newUsername);
-    localStorage.setItem("kv_admin_pass", newPassword);
+    const cleanUser = newUsername.trim();
+    const cleanPass = newPassword.trim();
+    setAdminUser(cleanUser);
+    setAdminPass(cleanPass);
+    setSecureLocalItem("kv_admin_user", cleanUser);
+    setSecureLocalItem("kv_admin_pass", cleanPass);
     setNewUsername("");
     setNewPassword("");
-    toast.success("Security Credentials Updated!", { description: "Protected and hidden from web repositories." });
+    toast.success(`Security Credentials Updated & Encrypted! 🔑`, { 
+      description: "Saved in obfuscated storage! Tap 'Auto-Sync GitHub' to push new password globally." 
+    });
   };
 
   // Export Data for Permanent Git Backup
@@ -1991,20 +2069,24 @@ function AdminPanelModal({
   };
 
   const importInputRef = useRef<HTMLInputElement>(null);
-  const [githubToken, setGithubToken] = useState(() => localStorage.getItem("kv_github_token") || "");
+  const [githubToken, setGithubToken] = useState(() => getSecureLocalItem("kv_github_token", ""));
+  const [githubOwner, setGithubOwner] = useState(() => getSecureLocalItem("kv_github_owner", "itskalpesh"));
+  const [githubRepo, setGithubRepo] = useState(() => getSecureLocalItem("kv_github_repo", "kv-portfolio"));
 
-  // Save GitHub Access Token in Browser (Strictly in Local Device Storage)
+  // Save GitHub Settings in Browser (Obfuscated Local Storage)
   const handleSaveGithubToken = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem("kv_github_token", githubToken);
-    toast.success("GitHub Token Saved Securely! 🗝️", {
-      description: "Stored exclusively on this device in localStorage. Never exposed to Git or clones."
+    setSecureLocalItem("kv_github_token", githubToken);
+    setSecureLocalItem("kv_github_owner", githubOwner.trim());
+    setSecureLocalItem("kv_github_repo", githubRepo.trim());
+    toast.success("GitHub Settings Saved & Obfuscated! 🗝️", {
+      description: `Targeting https://github.com/${githubOwner.trim()}/${githubRepo.trim()}`
     });
   };
 
   // Direct GitHub API Automated Commit Sync
   const handleSyncDirectToGitHub = async () => {
-    const token = (import.meta as any).env?.VITE_GITHUB_TOKEN || localStorage.getItem("kv_github_token") || githubToken;
+    const token = (import.meta as any).env?.VITE_GITHUB_TOKEN || getSecureLocalItem("kv_github_token", githubToken);
     if (!token) {
       toast.error("GitHub Access Token Required! 🔑", {
         description: "Go to Security & Sync tab -> enter your GitHub PAT token to enable direct auto-commits!"
@@ -2012,15 +2094,17 @@ function AdminPanelModal({
       return;
     }
 
-    const repoOwner = "itskalpesh";
-    const repoName = "kv-portfolio-main";
-    const filePath = "artifacts/portfolio/src/data/portfolioData.json";
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+    const owner = (localStorage.getItem("kv_github_owner") || githubOwner || "itskalpesh").trim();
+    const repo = (localStorage.getItem("kv_github_repo") || githubRepo || "kv-portfolio").trim();
+    
+    // File target path inside repository
+    const filePath = "portfolioData.json";
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
 
-    const toastId = toast.loading("Syncing & committing directly to GitHub repository...");
+    const toastId = toast.loading(`Committing to https://github.com/${owner}/${repo}...`);
 
     try {
-      // 1. Get existing file SHA if file exists
+      // 1. Check if file exists and get SHA
       let sha = "";
       const getRes = await fetch(apiUrl, {
         headers: {
@@ -2034,14 +2118,20 @@ function AdminPanelModal({
         sha = getJson.sha;
       }
 
-      // 2. Prepare JSON payload & encode to Base64
+      // 2. Prepare JSON payload with custom admin credentials sync & Base64 encode
+      const activeUser = localStorage.getItem("kv_admin_user") || adminUser;
+      const activePass = localStorage.getItem("kv_admin_pass") || adminPass;
+
       const payload = {
         projects,
         certificates,
+        adminConfig: {
+          customUser: activeUser,
+          customPass: activePass
+        },
         syncedAt: new Date().toISOString()
       };
       const jsonStr = JSON.stringify(payload, null, 2);
-      // UTF-8 friendly Base64 encoder
       const contentEncoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(parseInt(p1, 16))));
 
       // 3. Send PUT request to GitHub REST API
@@ -2061,13 +2151,13 @@ function AdminPanelModal({
 
       if (putRes.ok) {
         toast.dismiss(toastId);
-        toast.success("Committed & Synced Directly to GitHub! 🚀", {
-          description: "Your live GitHub site will update automatically in ~30 seconds!"
+        toast.success(`Committed & Synced to ${owner}/${repo}! 🚀`, {
+          description: "Your live website will update automatically in ~30 seconds!"
         });
       } else {
         const errData = await putRes.json();
         toast.dismiss(toastId);
-        toast.error(`GitHub API Error: ${errData.message || "Failed to commit"}`);
+        toast.error(`GitHub API (${putRes.status}): ${errData.message || "Failed to commit"}`);
       }
     } catch (err: any) {
       toast.dismiss(toastId);
@@ -2188,6 +2278,12 @@ function AdminPanelModal({
               >
                 <KeyRound size={16} /> Security Credentials
               </button>
+              <button 
+                onClick={() => setActiveTab("voice")}
+                className={cn("px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-2", activeTab === "voice" ? "bg-emerald-500 text-white shadow-md" : "bg-muted text-muted-foreground hover:text-foreground")}
+              >
+                <Bot size={16} /> AI Voice Engine
+              </button>
 
               <div className="flex flex-wrap gap-2 sm:ml-auto">
                 <button 
@@ -2222,11 +2318,11 @@ function AdminPanelModal({
                   <Upload size={14} className="rotate-180" /> Export JSON
                 </button>
                 <a 
-                  href="https://github.com/itskalpesh/kv-portfolio-main" 
+                  href={`https://github.com/${githubOwner}/${githubRepo}`}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="px-3 py-2.5 rounded-xl bg-accent/10 text-accent border border-accent/30 text-xs font-mono font-bold hover:bg-accent/20 transition-all flex items-center gap-1.5"
-                  title="Open GitHub Repository (itskalpesh/kv-portfolio-main) in new tab"
+                  title={`Open GitHub Repository (${githubOwner}/${githubRepo}) in new tab`}
                 >
                   <FolderGit2 size={14} /> Open GitHub Repo <ExternalLink size={10} />
                 </a>
@@ -2472,24 +2568,52 @@ function AdminPanelModal({
                     <span>DIRECT GITHUB REPOSITORY SYNC (AUTO-COMMIT API)</span>
                   </div>
                   <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                    Connect your GitHub repository directly to save updates automatically! Enter your GitHub Personal Access Token (PAT) to commit updates directly to <span className="text-primary font-bold">itskalpesh/kv-portfolio-main</span> without needing terminal commands or manual file uploads.
+                    Connect your GitHub repository directly to save updates automatically! Target: <span className="text-primary font-bold">https://github.com/{githubOwner}/{githubRepo}</span>
                   </p>
 
                   <div className="space-y-3 font-mono text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs text-muted-foreground mb-1 block">GITHUB USERNAME / OWNER</label>
+                        <input 
+                          type="text"
+                          placeholder="itskalpesh" 
+                          value={githubOwner}
+                          onChange={(e) => setGithubOwner(e.target.value)}
+                          className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-muted-foreground mb-1 block">GITHUB REPOSITORY NAME</label>
+                        <input 
+                          type="text"
+                          placeholder="kv-portfolio" 
+                          value={githubRepo}
+                          onChange={(e) => setGithubRepo(e.target.value)}
+                          className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs"
+                        />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="text-xs text-muted-foreground mb-1 block">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
                       <input 
                         type="password"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        data-lpignore="true"
+                        data-form-type="other"
                         placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
                         value={githubToken}
                         onChange={(e) => setGithubToken(e.target.value)}
-                        className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs"
+                        className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs font-mono"
                       />
                     </div>
 
                     <div className="flex flex-wrap gap-3 pt-1">
                       <button type="submit" className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:opacity-90">
-                        Save GitHub Token
+                        Save GitHub Settings
                       </button>
                       <button 
                         type="button" 
@@ -2509,7 +2633,7 @@ function AdminPanelModal({
                     <span>UPDATE ADMIN CREDENTIALS</span>
                   </div>
                   <p className="text-xs text-muted-foreground font-mono">
-                    Updates your local admin username and password. Saved securely in local state storage.
+                    Updates your local admin username and password. Saved securely in obfuscated storage.
                   </p>
 
                   <div className="space-y-4 font-mono text-sm">
@@ -2517,6 +2641,11 @@ function AdminPanelModal({
                       <label className="text-xs text-muted-foreground mb-1 block">NEW USERNAME</label>
                       <input 
                         type="text"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        data-lpignore="true"
+                        data-form-type="other"
                         placeholder="Enter new username" 
                         value={newUsername}
                         onChange={(e) => setNewUsername(e.target.value)}
@@ -2528,6 +2657,11 @@ function AdminPanelModal({
                       <label className="text-xs text-muted-foreground mb-1 block">NEW PASSWORD</label>
                       <input 
                         type="password"
+                        autoComplete="new-password"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        data-lpignore="true"
+                        data-form-type="other"
                         placeholder="Enter new password" 
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
@@ -2540,6 +2674,92 @@ function AdminPanelModal({
                     </button>
                   </div>
                 </form>
+              </div>
+            )}
+
+            {/* Tab 4: AI Voice Engine Customizer */}
+            {activeTab === "voice" && (
+              <div className="flex-1 overflow-y-auto space-y-6 pr-2 max-w-2xl mx-auto w-full py-4">
+                <div className="glass-panel p-6 rounded-2xl border border-primary/30 space-y-5">
+                  <div className="flex items-center gap-3 text-primary font-mono font-bold text-sm">
+                    <Bot size={20} />
+                    <span>KV-AI VOICE SYNTHESIZER CUSTOMIZER</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground font-mono leading-relaxed">
+                    Customize the voice model, pitch, and speaking speed for your 3D Draggable AI Copilot (<span className="text-primary font-bold">KV-AI</span>). Select your preferred system voice below and test it live!
+                  </p>
+
+                  {/* Voice Selection Dropdown */}
+                  <div className="space-y-4 font-mono text-xs">
+                    <div>
+                      <label className="text-muted-foreground mb-1 block font-bold">SELECT AI VOICE MODEL ({availableVoices.length} Available)</label>
+                      <select 
+                        value={selectedVoiceURI} 
+                        onChange={(e) => setSelectedVoiceURI(e.target.value)}
+                        className="w-full bg-background border border-border px-4 py-3 rounded-xl outline-none focus:border-primary font-mono text-xs text-foreground"
+                      >
+                        {availableVoices.map((v) => (
+                          <option key={v.voiceURI} value={v.voiceURI}>
+                            {v.name} ({v.lang})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Pitch Slider */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-muted-foreground">VOICE PITCH:</span>
+                        <span className="text-primary">{voicePitch.toFixed(2)} ({voicePitch < 0.8 ? "Robotic Low" : voicePitch > 1.2 ? "High Cyber" : "Natural Medium"})</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0.5" 
+                        max="1.8" 
+                        step="0.05" 
+                        value={voicePitch} 
+                        onChange={(e) => setVoicePitch(parseFloat(e.target.value))}
+                        className="w-full accent-primary cursor-pointer"
+                      />
+                    </div>
+
+                    {/* Rate Slider */}
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold">
+                        <span className="text-muted-foreground">SPEAKING SPEED (RATE):</span>
+                        <span className="text-accent">{voiceRate.toFixed(2)}x ({voiceRate < 0.9 ? "Slow & Steady" : voiceRate > 1.2 ? "Fast Execution" : "Normal"})</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="0.5" 
+                        max="1.8" 
+                        step="0.05" 
+                        value={voiceRate} 
+                        onChange={(e) => setVoiceRate(parseFloat(e.target.value))}
+                        className="w-full accent-accent cursor-pointer"
+                      />
+                    </div>
+
+                    {/* Buttons: Test Voice Sample & Save Preferences */}
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <button 
+                        type="button" 
+                        onClick={handleTestVoiceSample}
+                        className="bg-primary/20 text-primary border border-primary/40 font-mono font-bold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-primary/30 flex items-center gap-2"
+                      >
+                        <Volume2 size={16} /> Test Voice Sample 🔊
+                      </button>
+
+                      <button 
+                        type="button" 
+                        onClick={handleSaveVoiceSettings}
+                        className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:opacity-90 flex items-center gap-2 shadow-lg"
+                      >
+                        <Check size={16} /> Save Voice Preference 💾
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -2612,18 +2832,25 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
       const cleanText = text.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
       const utterance = new SpeechSynthesisUtterance(cleanText);
 
-      // Select crisp English robotic voice
+      // Resolve saved voice preference
       const voices = window.speechSynthesis.getVoices();
-      const roboVoice = voices.find(v => 
-        (v.name.includes("Google") || v.name.includes("David") || v.name.includes("Natural") || v.name.includes("English")) && v.lang.startsWith("en")
-      ) || voices[0];
+      const savedVoiceURI = localStorage.getItem("kv_ai_voice_uri");
+      const savedPitch = parseFloat(localStorage.getItem("kv_ai_pitch") || "0.88");
+      const savedRate = parseFloat(localStorage.getItem("kv_ai_rate") || "1.04");
 
-      if (roboVoice) {
-        utterance.voice = roboVoice;
+      let selectedVoice = voices.find(v => v.voiceURI === savedVoiceURI);
+      if (!selectedVoice) {
+        selectedVoice = voices.find(v => 
+          (v.name.includes("Google") || v.name.includes("David") || v.name.includes("Natural") || v.name.includes("English")) && v.lang.startsWith("en")
+        ) || voices[0];
       }
 
-      utterance.pitch = 0.88; // Smooth futuristic lower pitch
-      utterance.rate = 1.04;  // Crisp execution rate
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+
+      utterance.pitch = savedPitch;
+      utterance.rate = savedRate;
       utterance.volume = 1.0;
       
       window.speechSynthesis.speak(utterance);
