@@ -2106,10 +2106,13 @@ function AdminPanelModal({
     try {
       // 1. Check if file exists and get SHA
       let sha = "";
+      const authHeader = token.startsWith("Bearer ") ? token : `Bearer ${token}`;
+      
       const getRes = await fetch(apiUrl, {
         headers: {
-          Authorization: `token ${token}`,
-          Accept: "application/vnd.github.v3+json"
+          Authorization: authHeader,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28"
         }
       });
 
@@ -2138,9 +2141,10 @@ function AdminPanelModal({
       const putRes = await fetch(apiUrl, {
         method: "PUT",
         headers: {
-          Authorization: `token ${token}`,
+          Authorization: authHeader,
           "Content-Type": "application/json",
-          Accept: "application/vnd.github.v3+json"
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28"
         },
         body: JSON.stringify({
           message: `🚀 Auto-sync portfolio data via Admin CMS (${new Date().toLocaleDateString()})`,
@@ -2157,7 +2161,13 @@ function AdminPanelModal({
       } else {
         const errData = await putRes.json();
         toast.dismiss(toastId);
-        toast.error(`GitHub API (${putRes.status}): ${errData.message || "Failed to commit"}`);
+        if (putRes.status === 404) {
+          toast.error(`GitHub API (404): Not Found`, {
+            description: `Ensure your PAT Token has access to private repo '${owner}/${repo}' with 'Contents: Read & Write' permission!`
+          });
+        } else {
+          toast.error(`GitHub API (${putRes.status}): ${errData.message || "Failed to commit"}`);
+        }
       }
     } catch (err: any) {
       toast.dismiss(toastId);
