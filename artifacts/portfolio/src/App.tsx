@@ -916,7 +916,7 @@ export default function Home() {
       {/* Full-Screen Certificate Viewer Modal */}
       <Dialog open={!!selectedCertImage} onOpenChange={(open) => !open && setSelectedCertImage(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black/95 backdrop-blur-2xl border-primary/50 text-foreground flex flex-col z-[9999]">
-          <DialogHeader className="p-4 border-b border-border/60 bg-secondary/30 flex flex-row items-center justify-between">
+          <DialogHeader className="p-4 border-b border-border/60 bg-secondary/30 flex flex-row items-center justify-between pr-12">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-primary/10 text-primary border border-primary/30">
                 <GraduationCap size={18} />
@@ -925,12 +925,6 @@ export default function Home() {
                 {selectedCertImage?.title}
               </DialogTitle>
             </div>
-            <button 
-              onClick={() => setSelectedCertImage(null)}
-              className="p-1.5 rounded-xl hover:bg-muted text-muted-foreground hover:text-foreground"
-            >
-              <X size={18} />
-            </button>
           </DialogHeader>
 
           <div className="p-4 md:p-8 flex items-center justify-center bg-black/60 max-h-[80vh] overflow-auto">
