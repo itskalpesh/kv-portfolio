@@ -9,6 +9,10 @@ import { cn } from "@/lib/utils";
 import portraitImg from "@/assets/Picsart_26-04-19_06-43-29-070_1776771771515.jpg";
 import robotImg from "@/assets/Picsart_26-04-20_21-47-46-924_1776771781463.png";
 import studyNotesImg from "./assets/study-notes-mockup.png";
+import mcpCertImg from "./assets/MCP.jpeg";
+import aiCertImg from "./assets/Ai.jpg";
+import pythonCertImg from "./assets/Python.jpg";
+import aptechCertImg from "./assets/Aptech-Computer.jpg";
 
 // Premium easing
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -24,26 +28,6 @@ const defaultProjectsData: ProjectItem[] = [
     description: "Comprehensive web platform built for students to access, organize, and share study notes. Features clean responsive UI, interactive navigation, and subject/topic categorization.",
     tags: ["HTML5", "CSS3", "JavaScript", "Responsive UI"],
     liveLink: "https://itskalpesh.github.io/study-notes-site/"
-  },
-  {
-    id: "devcraft-hub",
-    title: "DevCraft Code Playground",
-    category: "Frontend & UI Engineering",
-    url: "devcraft.kvcoder.dev",
-    image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0f19'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23141a29' stroke='%2300ffc8' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>DevCraft Snippets Studio</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Interactive UI Component &amp; Palette Generator</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>⚡ Live Preview Active</text></svg>",
-    description: "Interactive developer environment for building component previews, managing snippet collections, and experimenting with real-time CSS gradients and animations.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveLink: "https://itskv-portfolio.netlify.app/"
-  },
-  {
-    id: "bca-portal",
-    title: "BCA Academic Resource Hub",
-    category: "Full Stack & Database",
-    url: "bca-portal.kvcoder.dev",
-    image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23090d16'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23111827' stroke='%23ec4899' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%23ec4899' text-anchor='middle'>BCA Academic Hub</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Syllabus Tracking &amp; Practical Lab Repository</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%23ec4899' text-anchor='middle'>📚 Academic System</text></svg>",
-    description: "Academic management portal designed to streamline practical lab programs, C/C++/Java assignments, and syllabus tracking for BCA computer science students.",
-    tags: ["Python", "PHP", "MySQL", "Web API"],
-    liveLink: "https://itskv-portfolio.netlify.app/"
   }
 ];
 
@@ -71,31 +55,40 @@ export interface CertificateItem {
 
 const defaultCertificatesData: CertificateItem[] = [
   {
-    id: "web-dev-cert",
-    title: "Full-Stack Web Development Fundamentals",
-    issuer: "Coursera / Meta Developer Network",
-    year: "2025",
-    description: "Certified proficiency in modern web development principles, covering HTML5, CSS3, JavaScript ES6+, responsive design patterns, and frontend architecture.",
-    skills: ["HTML5", "CSS3", "JavaScript", "Responsive UI"],
-    image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23080d1a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%2311192e' stroke='%2300ffc8' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%2300ffc8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Full-Stack Web Development</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%2300ffc8' text-anchor='middle'>Coursera / Meta Developer Network • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%2300ffc8' fill-opacity='0.1' stroke='%2300ffc8'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    id: "nxtwave-mcp-cert",
+    title: "MCP Workshop: Build AI Automations That Work For You",
+    issuer: "NxtWave (NXT WAVE™)",
+    year: "2026",
+    description: "Successfully completed the hands-on project in the 'MCP Workshop: Build AI Automations That Work For You', conducted by MCP expert and an IIT Guwahati alumnus, Mr Revanth Konakanchi. Equipped with essential AI Era automation skills.",
+    skills: ["MCP", "AI Automations", "Model Context Protocol", "AI Agents"],
+    image: mcpCertImg
   },
   {
-    id: "python-cert",
-    title: "Python Programming & Problem Solving",
-    issuer: "Infosys Springboard / HackerRank",
-    year: "2025",
-    description: "Demonstrated core expertise in Python object-oriented programming, data structures, algorithm logic, and script automation.",
-    skills: ["Python", "OOP", "Data Structures", "Algorithms"],
-    image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0d18'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23151829' stroke='%23ec4899' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%23ec4899' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Python Programming Certification</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%23ec4899' text-anchor='middle'>Infosys Springboard / HackerRank • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%23ec4899' fill-opacity='0.1' stroke='%23ec4899'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%23ec4899' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    id: "guvi-ai-india-cert",
+    title: "AI For India 2.0",
+    issuer: "GUVI / Skill India Digital / NSDC",
+    year: "2023",
+    description: "Successfully completed the online skilling course on AI For India 2.0 offered by GUVI through Skill India Digital and NSDC. Authorized by Founder & CEO M. Arunprakash.",
+    skills: ["Artificial Intelligence", "AI 2.0", "Python for AI", "Machine Learning"],
+    image: aiCertImg
   },
   {
-    id: "db-sql-cert",
-    title: "Database Management & SQL Systems",
-    issuer: "NPTEL / Oracle Academy",
-    year: "2024",
-    description: "Practical certification in relational database management systems, complex SQL queries, database normalization, and MySQL transaction administration.",
-    skills: ["SQL", "MySQL", "Relational DB", "Schema Design"],
-    image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%2308101a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23101c2e' stroke='%233b82f6' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%233b82f6' fill-opacity='0.15' stroke='%233b82f6' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%233b82f6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>RDBMS &amp; SQL Mastery</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%233b82f6' text-anchor='middle'>NPTEL / Oracle Academy • 2024</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%233b82f6' fill-opacity='0.1' stroke='%233b82f6'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%233b82f6' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>"
+    id: "guvi-python-cert",
+    title: "Python Certification of Achievement",
+    issuer: "GUVI (Google for Education Partner)",
+    year: "2023",
+    description: "Awarded the certificate of achievement for the successful completion of the Python programming course. Verified Certificate ID: z0H19fP2476w43l3b9.",
+    skills: ["Python", "Core Python", "OOP", "Data Structures"],
+    image: pythonCertImg
+  },
+  {
+    id: "aptech-msoffice-cert",
+    title: "M.S. Office & Internet",
+    issuer: "Aptech Computer Education / Vidya",
+    year: "2023",
+    description: "Certificate of Participation for completing the M.S. Office & Internet course at Nipani centre. Credential Sr. No. 22321.",
+    skills: ["MS Office", "MS Word & Excel", "PowerPoint", "Internet & Web Fundamentals"],
+    image: aptechCertImg
   }
 ];
 
@@ -104,22 +97,46 @@ export default function Home() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [activeSection, setActiveSection] = useState("hero");
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [selectedCertImage, setSelectedCertImage] = useState<{ url: string; title: string } | null>(null);
 
   // Dynamic Persistent Datasets
   const [projects, setProjects] = useState<ProjectItem[]>(() => {
+    const validIds = new Set(defaultProjectsData.map(d => d.id));
     const saved = localStorage.getItem("kv_projects");
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const filtered = parsed.filter((p: ProjectItem) => validIds.has(p.id));
+          if (filtered.length > 0) return filtered;
+        }
+      } catch (e) {}
     }
     return defaultProjectsData;
   });
 
   const [certificates, setCertificates] = useState<CertificateItem[]>(() => {
+    const validIds = new Set(defaultCertificatesData.map(d => d.id));
     const saved = localStorage.getItem("kv_certificates");
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const filtered = parsed.filter((c: CertificateItem) => validIds.has(c.id));
+          const updated = filtered.map((c: CertificateItem) => {
+            if (c.id === "nxtwave-mcp-cert") return { ...c, image: mcpCertImg };
+            if (c.id === "guvi-ai-india-cert") return { ...c, image: aiCertImg };
+            if (c.id === "guvi-python-cert") return { ...c, image: pythonCertImg };
+            if (c.id === "aptech-msoffice-cert") return { ...c, image: aptechCertImg };
+            return c;
+          });
+          const missing = defaultCertificatesData.filter(d => !updated.some((c: CertificateItem) => c.id === d.id));
+          if (missing.length > 0) {
+            return [...missing, ...updated];
+          }
+          return updated;
+        }
+      } catch (e) {}
     }
     return defaultCertificatesData;
   });
@@ -273,9 +290,6 @@ export default function Home() {
           <button onClick={toggleTheme} className="hover:text-primary transition-colors cursor-hover-target">
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button onClick={() => setIsAdminOpen(true)} className="hover:text-primary transition-colors cursor-hover-target text-muted-foreground" title="Admin Security Console">
-            <ShieldCheck size={16} />
-          </button>
         </div>
 
         <div className="hidden md:block">
@@ -288,9 +302,6 @@ export default function Home() {
 
         {/* Mobile Menu */}
         <div className="md:hidden flex items-center gap-4">
-          <button onClick={() => setIsAdminOpen(true)} className="text-foreground" title="Admin Security Console">
-            <ShieldCheck size={18} />
-          </button>
           <button onClick={toggleTheme} className="text-foreground">
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -940,16 +951,6 @@ export default function Home() {
           </div>
         </DialogContent>
       </Dialog>
-
-      {/* Secure Admin Console CMS Modal */}
-      <AdminPanelModal 
-        isOpen={isAdminOpen} 
-        onClose={() => setIsAdminOpen(false)} 
-        projects={projects} 
-        certificates={certificates} 
-        onSaveProjects={handleSaveProjects} 
-        onSaveCertificates={handleSaveCertificates} 
-      />
 
       {/* Autonomous Web AI Copilot Assistant */}
       <AICopilot scrollTo={scrollTo} projects={projects} certificates={certificates} />
@@ -1825,981 +1826,6 @@ function DragDropImageUploader({
   );
 }
 
-// Bank-Grade Obfuscated Local Storage Encoder (Prevents DevTools inspection & extension sniffing)
-const setSecureLocalItem = (key: string, value: string) => {
-  try {
-    const encoded = btoa(`kv_sec_v1:${encodeURIComponent(value)}`);
-    localStorage.setItem(key, encoded);
-  } catch (e) {
-    localStorage.setItem(key, value);
-  }
-};
-
-const getSecureLocalItem = (key: string, fallback = "") => {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return fallback;
-    if (raw.startsWith("kv_sec_v1:")) return decodeURIComponent(raw.replace("kv_sec_v1:", ""));
-    const decoded = decodeURIComponent(atob(raw));
-    if (decoded.startsWith("kv_sec_v1:")) return decoded.replace("kv_sec_v1:", "");
-    return raw;
-  } catch (e) {
-    return localStorage.getItem(key) || fallback;
-  }
-};
-
-// ---------------- Admin Security Console CMS Modal ---------------- //
-function AdminPanelModal({ 
-  isOpen, 
-  onClose,
-  projects,
-  certificates,
-  onSaveProjects,
-  onSaveCertificates
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  projects: ProjectItem[];
-  certificates: CertificateItem[];
-  onSaveProjects: (items: ProjectItem[]) => void;
-  onSaveCertificates: (items: CertificateItem[]) => void;
-}) {
-  const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "security" | "voice">("projects");
-  const [usernameInput, setUsernameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
-
-  // Obfuscated Credentials Lookup
-  const getSavedUser = () => getSecureLocalItem("kv_admin_user", "coder");
-  const getSavedPass = () => getSecureLocalItem("kv_admin_pass", "coder1301");
-
-  const [adminUser, setAdminUser] = useState(getSavedUser);
-  const [adminPass, setAdminPass] = useState(getSavedPass);
-
-  // AI Voice Customizer State
-  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [selectedVoiceURI, setSelectedVoiceURI] = useState(() => localStorage.getItem("kv_ai_voice_uri") || "");
-  const [voicePitch, setVoicePitch] = useState(() => parseFloat(localStorage.getItem("kv_ai_pitch") || "0.88"));
-  const [voiceRate, setVoiceRate] = useState(() => parseFloat(localStorage.getItem("kv_ai_rate") || "1.04"));
-
-  useEffect(() => {
-    if (!('speechSynthesis' in window)) return;
-    const loadVoices = () => {
-      const list = window.speechSynthesis.getVoices();
-      if (list.length > 0) {
-        setAvailableVoices(list);
-        if (!selectedVoiceURI) {
-          const defaultV = list.find(v => (v.name.includes("Google") || v.name.includes("David") || v.name.includes("Natural") || v.name.includes("English")) && v.lang.startsWith("en")) || list[0];
-          if (defaultV) setSelectedVoiceURI(defaultV.voiceURI);
-        }
-      }
-    };
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-  }, []);
-
-  const handleTestVoiceSample = () => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    playCyberBeep(1100, "sine", 0.08);
-
-    const sampleText = "Hello Kalpesh! This is your customized KV-AI voice copilot speaking.";
-    const utterance = new SpeechSynthesisUtterance(sampleText);
-    const vObj = availableVoices.find(v => v.voiceURI === selectedVoiceURI);
-    if (vObj) utterance.voice = vObj;
-    utterance.pitch = voicePitch;
-    utterance.rate = voiceRate;
-    window.speechSynthesis.speak(utterance);
-  };
-
-  const handleSaveVoiceSettings = () => {
-    localStorage.setItem("kv_ai_voice_uri", selectedVoiceURI);
-    localStorage.setItem("kv_ai_pitch", voicePitch.toString());
-    localStorage.setItem("kv_ai_rate", voiceRate.toString());
-    toast.success("AI Voice Preference Saved! 🎤", {
-      description: "KV-AI will now speak using your selected voice model and pitch."
-    });
-  };
-
-  // Project Form State
-  const [projForm, setProjForm] = useState<Partial<ProjectItem>>({ title: "", category: "Web Development", url: "", image: "", description: "", tags: [] });
-  const [editingProjId, setEditingProjId] = useState<string | null>(null);
-
-  // Certificate Form State
-  const [certForm, setCertForm] = useState<Partial<CertificateItem>>({ title: "", issuer: "", year: "2026", description: "", skills: [] });
-  const [editingCertId, setEditingCertId] = useState<string | null>(null);
-
-  // Security Form State
-  const [newUsername, setNewUsername] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const activeUser = getSecureLocalItem("kv_admin_user", adminUser);
-    const activePass = getSecureLocalItem("kv_admin_pass", adminPass);
-
-    if (usernameInput.trim() === activeUser && passwordInput.trim() === activePass) {
-      setIsAuth(true);
-      toast.success("Security Authentication Success!", { description: `Welcome Admin ${activeUser}` });
-    } else {
-      toast.error("Access Denied: Invalid Credentials", { description: "Incorrect username or password." });
-    }
-  };
-
-  const handleLogout = () => {
-    setIsAuth(false);
-    setUsernameInput("");
-    setPasswordInput("");
-  };
-
-  // Projects CRUD
-  const handleSaveProject = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!projForm.title || !projForm.description) {
-      toast.error("Please fill required fields (Title & Description)");
-      return;
-    }
-
-    const tagsArray = typeof projForm.tags === "string" ? (projForm.tags as string).split(",").map(t => t.trim()).filter(Boolean) : (projForm.tags || ["Web"]);
-
-    if (editingProjId) {
-      const updated = projects.map(p => p.id === editingProjId ? { ...p, ...projForm, tags: tagsArray } as ProjectItem : p);
-      onSaveProjects(updated);
-      toast.success("Project updated successfully!");
-    } else {
-      const newProj: ProjectItem = {
-        id: `proj-${Date.now()}`,
-        title: projForm.title || "Untitled",
-        category: projForm.category || "Web Development",
-        url: projForm.url || "kvcoder.dev",
-        image: projForm.image || studyNotesImg,
-        description: projForm.description || "",
-        tags: tagsArray,
-        liveLink: projForm.url ? `https://${projForm.url}` : "#"
-      };
-      onSaveProjects([newProj, ...projects]);
-      toast.success("New Project added!");
-    }
-    setProjForm({ title: "", category: "Web Development", url: "", image: "", description: "", tags: [] });
-    setEditingProjId(null);
-  };
-
-  const handleDeleteProject = (id: string) => {
-    const updated = projects.filter(p => p.id !== id);
-    onSaveProjects(updated);
-    toast.success("Project deleted.");
-  };
-
-  // Certificates CRUD
-  const handleSaveCertificate = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!certForm.title || !certForm.issuer) {
-      toast.error("Please fill required fields (Title & Issuer)");
-      return;
-    }
-
-    const skillsArray = typeof certForm.skills === "string" ? (certForm.skills as string).split(",").map(s => s.trim()).filter(Boolean) : (certForm.skills || ["Skill"]);
-
-    if (editingCertId) {
-      const updated = certificates.map(c => c.id === editingCertId ? { ...c, ...certForm, skills: skillsArray } as CertificateItem : c);
-      onSaveCertificates(updated);
-      toast.success("Certificate updated!");
-    } else {
-      const newCert: CertificateItem = {
-        id: `cert-${Date.now()}`,
-        title: certForm.title || "Untitled Cert",
-        issuer: certForm.issuer || "Issuing Body",
-        year: certForm.year || "2026",
-        description: certForm.description || "",
-        skills: skillsArray,
-        image: certForm.image || undefined
-      };
-      onSaveCertificates([newCert, ...certificates]);
-      toast.success("New Certificate added!");
-    }
-    setCertForm({ title: "", issuer: "", year: "2026", description: "", skills: [] });
-    setEditingCertId(null);
-  };
-
-  const handleDeleteCertificate = (id: string) => {
-    const updated = certificates.filter(c => c.id !== id);
-    onSaveCertificates(updated);
-    toast.success("Certificate deleted.");
-  };
-
-  // Change Admin Credentials (Obfuscated & Encrypted in Local Storage)
-  const handleChangeCredentials = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newUsername || !newPassword) {
-      toast.error("Enter new username and new password");
-      return;
-    }
-    const cleanUser = newUsername.trim();
-    const cleanPass = newPassword.trim();
-    setAdminUser(cleanUser);
-    setAdminPass(cleanPass);
-    setSecureLocalItem("kv_admin_user", cleanUser);
-    setSecureLocalItem("kv_admin_pass", cleanPass);
-    setNewUsername("");
-    setNewPassword("");
-    toast.success(`Security Credentials Updated & Encrypted! 🔑`, { 
-      description: "Saved in obfuscated storage! Tap 'Auto-Sync GitHub' to push new password globally." 
-    });
-  };
-
-  // Export Data for Permanent Git Backup
-  const handleExportGitData = () => {
-    const exportPayload = {
-      projects,
-      certificates,
-      exportedAt: new Date().toLocaleString()
-    };
-    const jsonStr = JSON.stringify(exportPayload, null, 2);
-    const blob = new Blob([jsonStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "kv-portfolio-data.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast.success("Portfolio data exported for Git repository! 📦", {
-      description: "File kv-portfolio-data.json saved. Commit this file to Git to update static defaults!"
-    });
-  };
-
-  const importInputRef = useRef<HTMLInputElement>(null);
-  const [githubToken, setGithubToken] = useState(() => getSecureLocalItem("kv_github_token", ""));
-  const [githubOwner, setGithubOwner] = useState(() => getSecureLocalItem("kv_github_owner", "itskalpesh"));
-  const [githubRepo, setGithubRepo] = useState(() => getSecureLocalItem("kv_github_repo", "kv-portfolio"));
-
-  // Save GitHub Settings in Browser (Obfuscated Local Storage)
-  const handleSaveGithubToken = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSecureLocalItem("kv_github_token", githubToken);
-    setSecureLocalItem("kv_github_owner", githubOwner.trim());
-    setSecureLocalItem("kv_github_repo", githubRepo.trim());
-    toast.success("GitHub Settings Saved & Obfuscated! 🗝️", {
-      description: `Targeting https://github.com/${githubOwner.trim()}/${githubRepo.trim()}`
-    });
-  };
-
-  // Direct GitHub API Automated Commit Sync
-  const handleSyncDirectToGitHub = async () => {
-    const token = (import.meta as any).env?.VITE_GITHUB_TOKEN || getSecureLocalItem("kv_github_token", githubToken);
-    if (!token) {
-      toast.error("GitHub Access Token Required! 🔑", {
-        description: "Go to Security & Sync tab -> enter your GitHub PAT token to enable direct auto-commits!"
-      });
-      return;
-    }
-
-    const owner = (getSecureLocalItem("kv_github_owner", githubOwner) || "itskalpesh").trim();
-    const repo = (getSecureLocalItem("kv_github_repo", githubRepo) || "kv-portfolio").trim();
-    
-    // File target path inside repository
-    const filePath = "portfolioData.json";
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-
-    const toastId = toast.loading(`Committing to https://github.com/${owner}/${repo}...`);
-
-    try {
-      // 1. Check if file exists and get SHA
-      let sha = "";
-      const authHeader = token.startsWith("Bearer ") ? token : `Bearer ${token}`;
-      
-      const getRes = await fetch(apiUrl, {
-        headers: {
-          Authorization: authHeader,
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28"
-        }
-      });
-
-      if (getRes.ok) {
-        const getJson = await getRes.json();
-        sha = getJson.sha;
-      }
-
-      // 2. Prepare JSON payload with custom admin credentials sync & Base64 encode
-      const activeUser = localStorage.getItem("kv_admin_user") || adminUser;
-      const activePass = localStorage.getItem("kv_admin_pass") || adminPass;
-
-      const payload = {
-        projects,
-        certificates,
-        adminConfig: {
-          customUser: activeUser,
-          customPass: activePass
-        },
-        syncedAt: new Date().toISOString()
-      };
-      const jsonStr = JSON.stringify(payload, null, 2);
-      const contentEncoded = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(parseInt(p1, 16))));
-
-      // 3. Send PUT request to GitHub REST API
-      const putRes = await fetch(apiUrl, {
-        method: "PUT",
-        headers: {
-          Authorization: authHeader,
-          "Content-Type": "application/json",
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28"
-        },
-        body: JSON.stringify({
-          message: `🚀 Auto-sync portfolio data via Admin CMS (${new Date().toLocaleDateString()})`,
-          content: contentEncoded,
-          sha: sha || undefined
-        })
-      });
-
-      if (putRes.ok) {
-        toast.dismiss(toastId);
-        toast.success(`Committed & Synced to ${owner}/${repo}! 🚀`, {
-          description: "Your live website will update automatically in ~30 seconds!"
-        });
-      } else {
-        const errData = await putRes.json();
-        toast.dismiss(toastId);
-        if (putRes.status === 404) {
-          toast.error(`GitHub API (404): Not Found`, {
-            description: `Ensure your PAT Token has access to private repo '${owner}/${repo}' with 'Contents: Read & Write' permission!`
-          });
-        } else {
-          toast.error(`GitHub API (${putRes.status}): ${errData.message || "Failed to commit"}`);
-        }
-      }
-    } catch (err: any) {
-      toast.dismiss(toastId);
-      toast.error("Failed to connect to GitHub API.", { description: err.message });
-    }
-  };
-
-  // Import JSON Data File (From Phone or Computer)
-  const handleImportGitData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const parsed = JSON.parse(event.target?.result as string);
-        if (parsed.projects && Array.isArray(parsed.projects)) {
-          onSaveProjects(parsed.projects);
-        }
-        if (parsed.certificates && Array.isArray(parsed.certificates)) {
-          onSaveCertificates(parsed.certificates);
-        }
-        toast.success("Portfolio data imported successfully! 🎉", {
-          description: "Projects and certificates updated on this device."
-        });
-      } catch (err) {
-        toast.error("Failed to parse JSON file.", { description: "Invalid file format." });
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-background/95 backdrop-blur-2xl border-primary/40 max-h-[90vh] flex flex-col">
-        <DialogHeader className="p-6 border-b border-border bg-secondary/40 flex flex-row items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-primary/10 text-primary border border-primary/30">
-              <ShieldCheck size={20} />
-            </div>
-            <div>
-              <DialogTitle className="text-xl font-mono font-bold flex items-center gap-2">
-                <span>KV.CODER ADMIN CMS</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary">SECURE</span>
-              </DialogTitle>
-              <DialogDescription className="text-xs font-mono text-muted-foreground">
-                {isAuth ? "Manage Projects & Certificates dynamically" : "Enter credentials to unlock Admin Console"}
-              </DialogDescription>
-            </div>
-          </div>
-
-          {isAuth && (
-            <button onClick={handleLogout} className="px-4 py-2 rounded-xl bg-destructive/10 text-destructive border border-destructive/20 text-xs font-mono font-bold hover:bg-destructive/20 transition-colors flex items-center gap-2">
-              <Lock size={14} /> Logout
-            </button>
-          )}
-        </DialogHeader>
-
-        {!isAuth ? (
-          /* Authentication Screen */
-          <div className="p-8 md:p-12 flex flex-col items-center justify-center max-w-md mx-auto w-full my-auto">
-            <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-6 animate-pulse">
-              <KeyRound size={28} />
-            </div>
-            <h3 className="text-2xl font-bold text-center mb-2">Admin Security Gate</h3>
-            <p className="text-xs text-muted-foreground text-center font-mono mb-8">
-              Protected Endpoint. Username &amp; Password are encrypted &amp; hidden from public web repositories.
-            </p>
-
-            <form onSubmit={handleLogin} className="w-full space-y-4 font-mono text-sm">
-              <div>
-                <label className="text-xs text-muted-foreground mb-1 block">USER NAME</label>
-                <input 
-                  type="text" 
-                  value={usernameInput}
-                  onChange={(e) => setUsernameInput(e.target.value)}
-                  placeholder="Enter username" 
-                  className="w-full bg-background border border-border px-4 py-3 rounded-xl focus:border-primary outline-none transition-colors"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs text-muted-foreground mb-1 block">PASSWORD</label>
-                <input 
-                  type="password" 
-                  value={passwordInput}
-                  onChange={(e) => setPasswordInput(e.target.value)}
-                  placeholder="Enter password" 
-                  className="w-full bg-background border border-border px-4 py-3 rounded-xl focus:border-primary outline-none transition-colors"
-                />
-              </div>
-
-              <button type="submit" className="w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-xl uppercase tracking-wider hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                <Unlock size={16} /> Authenticate Console
-              </button>
-            </form>
-          </div>
-        ) : (
-          /* Admin Dashboard Screen */
-          <div className="flex-1 flex flex-col overflow-hidden p-6 gap-6">
-            {/* Tabs */}
-            <div className="flex flex-wrap gap-3 border-b border-border pb-3 items-center">
-              <button 
-                onClick={() => setActiveTab("projects")}
-                className={cn("px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-2", activeTab === "projects" ? "bg-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground hover:text-foreground")}
-              >
-                <FileCode2 size={16} /> Projects ({projects.length})
-              </button>
-              <button 
-                onClick={() => setActiveTab("certificates")}
-                className={cn("px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-2", activeTab === "certificates" ? "bg-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground hover:text-foreground")}
-              >
-                <GraduationCap size={16} /> Certificates ({certificates.length})
-              </button>
-              <button 
-                onClick={() => setActiveTab("security")}
-                className={cn("px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-2", activeTab === "security" ? "bg-accent text-accent-foreground shadow-md" : "bg-muted text-muted-foreground hover:text-foreground")}
-              >
-                <KeyRound size={16} /> Security Credentials
-              </button>
-              <button 
-                onClick={() => setActiveTab("voice")}
-                className={cn("px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-2", activeTab === "voice" ? "bg-emerald-500 text-white shadow-md" : "bg-muted text-muted-foreground hover:text-foreground")}
-              >
-                <Bot size={16} /> AI Voice Engine
-              </button>
-
-              <div className="flex flex-wrap gap-2 sm:ml-auto">
-                <button 
-                  type="button"
-                  onClick={handleSyncDirectToGitHub}
-                  className="px-3 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white border border-emerald-400 text-xs font-mono font-bold hover:opacity-90 transition-all flex items-center gap-1.5 shadow-md"
-                  title="Direct 1-Click Sync & Commit to GitHub Repository"
-                >
-                  <Sparkles size={14} /> Auto-Sync GitHub
-                </button>
-                <input 
-                  type="file" 
-                  ref={importInputRef} 
-                  accept=".json" 
-                  className="hidden" 
-                  onChange={handleImportGitData} 
-                />
-                <button 
-                  type="button"
-                  onClick={() => importInputRef.current?.click()}
-                  className="px-3 py-2.5 rounded-xl bg-primary/10 text-primary border border-primary/30 text-xs font-mono font-bold hover:bg-primary/20 transition-all flex items-center gap-1.5"
-                  title="Import portfolio data JSON file from phone or computer"
-                >
-                  <Upload size={14} /> Import JSON
-                </button>
-                <button 
-                  type="button"
-                  onClick={handleExportGitData}
-                  className="px-3 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold hover:bg-emerald-500/20 transition-all flex items-center gap-1.5"
-                  title="Export updated data to JSON for permanent Git commit"
-                >
-                  <Upload size={14} className="rotate-180" /> Export JSON
-                </button>
-                <a 
-                  href={`https://github.com/${githubOwner}/${githubRepo}`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-3 py-2.5 rounded-xl bg-accent/10 text-accent border border-accent/30 text-xs font-mono font-bold hover:bg-accent/20 transition-all flex items-center gap-1.5"
-                  title={`Open GitHub Repository (${githubOwner}/${githubRepo}) in new tab`}
-                >
-                  <FolderGit2 size={14} /> Open GitHub Repo <ExternalLink size={10} />
-                </a>
-              </div>
-            </div>
-
-            {/* Tab 1: Projects */}
-            {activeTab === "projects" && (
-              <div className="flex-1 overflow-y-auto space-y-6 pr-2">
-                <form onSubmit={handleSaveProject} className="glass-panel p-6 rounded-2xl border border-primary/20 space-y-4">
-                  <h4 className="font-bold text-sm font-mono text-primary flex items-center gap-2">
-                    <Plus size={16} /> {editingProjId ? "Edit Project" : "Add New / Old Showcase Project"}
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="Project Title" 
-                      value={projForm.title || ""} 
-                      onChange={(e) => setProjForm({ ...projForm, title: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                    <input 
-                      type="text" 
-                      placeholder="Category (e.g. Web Development)" 
-                      value={projForm.category || ""} 
-                      onChange={(e) => setProjForm({ ...projForm, category: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="URL Domain (e.g. project.kvcoder.dev)" 
-                      value={projForm.url || ""} 
-                      onChange={(e) => setProjForm({ ...projForm, url: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary sm:col-span-2"
-                    />
-                    <select 
-                      value={projForm.status || "New / Active"}
-                      onChange={(e) => setProjForm({ ...projForm, status: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary font-mono text-xs font-bold"
-                    >
-                      <option value="New / Active">Status: New / Active</option>
-                      <option value="Old / Legacy">Status: Old / Legacy</option>
-                    </select>
-                  </div>
-
-                  {/* Drag and Drop Image Uploader */}
-                  <DragDropImageUploader 
-                    value={projForm.image || ""} 
-                    onChange={(val) => setProjForm({ ...projForm, image: val })} 
-                  />
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="Image URL or SVG Mockup Data (Optional Manual Input)" 
-                      value={projForm.image || ""} 
-                      onChange={(e) => setProjForm({ ...projForm, image: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                    <input 
-                      type="text" 
-                      placeholder="Tags (comma separated: React, Python, Tailwind)" 
-                      value={Array.isArray(projForm.tags) ? projForm.tags.join(", ") : projForm.tags || ""} 
-                      onChange={(e) => setProjForm({ ...projForm, tags: e.target.value as any })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                  </div>
-
-                  {/* Quick Image Presets */}
-                  <div className="flex flex-wrap gap-2 items-center text-xs font-mono pt-1">
-                    <span className="text-muted-foreground font-bold">Image Presets:</span>
-                    <button type="button" onClick={() => setProjForm({ ...projForm, image: studyNotesImg })} className="px-3 py-1 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-bold">
-                      📚 Study Notes Mockup
-                    </button>
-                    <button type="button" onClick={() => setProjForm({ ...projForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0f19'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23141a29' stroke='%2300ffc8' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>DevCraft Snippets Studio</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Interactive UI Component &amp; Palette Generator</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>⚡ Live Preview Active</text></svg>" })} className="px-3 py-1 rounded-lg bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20 font-bold">
-                      💻 DevCraft Code
-                    </button>
-                    <button type="button" onClick={() => setProjForm({ ...projForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23090d16'/><rect x='40' y='40' width='720' height='420' rx='16' fill='%23111827' stroke='%23ec4899' stroke-opacity='0.3'/><circle cx='80' cy='75' r='6' fill='%23ff5f56'/><circle cx='100' cy='75' r='6' fill='%23ffbd2e'/><circle cx='120' cy='75' r='6' fill='%2327c93f'/><text x='400' y='220' font-family='monospace' font-size='28' font-weight='bold' fill='%23ec4899' text-anchor='middle'>BCA Academic Hub</text><text x='400' y='270' font-family='monospace' font-size='16' fill='%2394a3b8' text-anchor='middle'>Syllabus Tracking &amp; Practical Lab Repository</text><rect x='280' y='320' width='240' height='48' rx='24' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899'/><text x='400' y='350' font-family='monospace' font-size='14' font-weight='bold' fill='%23ec4899' text-anchor='middle'>📚 Academic System</text></svg>" })} className="px-3 py-1 rounded-lg bg-pink-500/10 text-pink-400 border border-pink-500/20 hover:bg-pink-500/20 font-bold">
-                      🎓 Academic Hub
-                    </button>
-                  </div>
-
-                  <textarea 
-                    placeholder="Project Description" 
-                    rows={3}
-                    value={projForm.description || ""} 
-                    onChange={(e) => setProjForm({ ...projForm, description: e.target.value })}
-                    className="w-full bg-background border border-border p-4 rounded-xl text-sm outline-none focus:border-primary"
-                  />
-                  <div className="flex gap-3">
-                    <button type="submit" className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider">
-                      {editingProjId ? "Update Project" : "Save Project"}
-                    </button>
-                    {editingProjId && (
-                      <button type="button" onClick={() => { setEditingProjId(null); setProjForm({}); }} className="bg-muted text-foreground px-4 py-2.5 rounded-xl text-xs font-mono">
-                        Cancel
-                      </button>
-                    )}
-                  </div>
-                </form>
-
-                <div className="space-y-3">
-                  <h5 className="font-mono text-xs text-muted-foreground uppercase tracking-widest">Active &amp; Old Projects ({projects.length})</h5>
-                  {projects.map((p) => (
-                    <div key={p.id} className="p-4 rounded-2xl border border-border bg-background/50 flex items-center justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="font-bold text-base">{p.title}</p>
-                          {p.status && (
-                            <span className={cn("text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase", p.status.includes("Old") ? "bg-amber-500/10 text-amber-400 border border-amber-500/30" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30")}>
-                              {p.status}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-muted-foreground font-mono">{p.category} • {p.url}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button onClick={() => { setEditingProjId(p.id); setProjForm(p); }} className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20" title="Edit Project">
-                          <Edit3 size={16} />
-                        </button>
-                        <button onClick={() => handleDeleteProject(p.id)} className="p-2 rounded-lg bg-destructive/10 text-destructive hover:bg-destructive/20" title="Remove Project">
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Tab 2: Certificates */}
-            {activeTab === "certificates" && (
-              <div className="flex-1 overflow-y-auto space-y-6 pr-2">
-                <form onSubmit={handleSaveCertificate} className="glass-panel p-6 rounded-2xl border border-primary/20 space-y-4">
-                  <h4 className="font-bold text-sm font-mono text-primary flex items-center gap-2">
-                    <Plus size={16} /> {editingCertId ? "Edit Certificate" : "Add New Certificate"}
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="Certificate Title" 
-                      value={certForm.title || ""} 
-                      onChange={(e) => setCertForm({ ...certForm, title: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary sm:col-span-2"
-                    />
-                    <input 
-                      type="text" 
-                      placeholder="Year (e.g. 2026)" 
-                      value={certForm.year || ""} 
-                      onChange={(e) => setCertForm({ ...certForm, year: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input 
-                      type="text" 
-                      placeholder="Issuer (e.g. Coursera / Meta)" 
-                      value={certForm.issuer || ""} 
-                      onChange={(e) => setCertForm({ ...certForm, issuer: e.target.value })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                    <input 
-                      type="text" 
-                      placeholder="Skills (comma separated: Python, OOP)" 
-                      value={Array.isArray(certForm.skills) ? certForm.skills.join(", ") : certForm.skills || ""} 
-                      onChange={(e) => setCertForm({ ...certForm, skills: e.target.value as any })}
-                      className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary"
-                    />
-                  </div>
-
-                  {/* Local Certificate Image Upload */}
-                  <DragDropImageUploader 
-                    value={certForm.image || ""} 
-                    onChange={(val) => setCertForm({ ...certForm, image: val })} 
-                  />
-                  <input 
-                    type="text" 
-                    placeholder="Image URL or SVG Badge Data (Optional Manual Input)" 
-                    value={certForm.image || ""} 
-                    onChange={(e) => setCertForm({ ...certForm, image: e.target.value })}
-                    className="bg-background border border-border px-4 py-2.5 rounded-xl text-sm outline-none focus:border-primary w-full"
-                  />
-                  {/* Preset Certificate Badge Buttons */}
-                  <div className="flex flex-wrap gap-2 items-center text-xs font-mono pt-1">
-                    <span className="text-muted-foreground font-bold">Badge Presets:</span>
-                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%23080d1a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%2311192e' stroke='%2300ffc8' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%2300ffc8' fill-opacity='0.15' stroke='%2300ffc8' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%2300ffc8' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Full-Stack Web Development</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%2300ffc8' text-anchor='middle'>Coursera / Meta Developer Network • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%2300ffc8' fill-opacity='0.1' stroke='%2300ffc8'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%2300ffc8' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-bold">
-                      🌐 Web Dev Badge
-                    </button>
-                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%230b0d18'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23151829' stroke='%23ec4899' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%23ec4899' fill-opacity='0.15' stroke='%23ec4899' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%23ec4899' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>Python Programming Certification</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%23ec4899' text-anchor='middle'>Infosys Springboard / HackerRank • 2025</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%23ec4899' fill-opacity='0.1' stroke='%23ec4899'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%23ec4899' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-pink-500/10 text-pink-400 border border-pink-500/20 hover:bg-pink-500/20 font-bold">
-                      🐍 Python Badge
-                    </button>
-                    <button type="button" onClick={() => setCertForm({ ...certForm, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%2308101a'/><rect x='40' y='40' width='720' height='420' rx='20' fill='%23101c2e' stroke='%233b82f6' stroke-opacity='0.4' stroke-width='2'/><circle cx='400' cy='180' r='60' fill='%233b82f6' fill-opacity='0.15' stroke='%233b82f6' stroke-width='3'/><path d='M380 180 L395 195 L425 165' stroke='%233b82f6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='400' y='280' font-family='monospace' font-size='24' font-weight='bold' fill='%23ffffff' text-anchor='middle'>RDBMS &amp; SQL Mastery</text><text x='400' y='320' font-family='monospace' font-size='16' fill='%233b82f6' text-anchor='middle'>NPTEL / Oracle Academy • 2024</text><rect x='280' y='360' width='240' height='40' rx='20' fill='%233b82f6' fill-opacity='0.1' stroke='%233b82f6'/><text x='400' y='385' font-family='monospace' font-size='13' font-weight='bold' fill='%233b82f6' text-anchor='middle'>✓ VERIFIED CREDENTIAL</text></svg>" })} className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 font-bold">
-                      🛢️ SQL Badge
-                    </button>
-                  </div>
-                  <textarea 
-                    placeholder="Certificate Description" 
-                    rows={3}
-                    value={certForm.description || ""} 
-                    onChange={(e) => setCertForm({ ...certForm, description: e.target.value })}
-                    className="w-full bg-background border border-border p-4 rounded-xl text-sm outline-none focus:border-primary"
-                  />
-                  <div className="flex gap-3">
-                    <button type="submit" className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider">
-                      {editingCertId ? "Update Certificate" : "Save Certificate"}
-                    </button>
-                    {editingCertId && (
-                      <button type="button" onClick={() => { setEditingCertId(null); setCertForm({}); }} className="bg-muted text-foreground px-4 py-2.5 rounded-xl text-xs font-mono">
-                        Cancel
-                      </button>
-                    )}
-                  </div>
-                </form>
-
-                <div className="space-y-3">
-                  <h5 className="font-mono text-xs text-muted-foreground uppercase tracking-widest">Active Certificates ({certificates.length})</h5>
-                  {certificates.map((c) => (
-                    <div key={c.id} className="p-4 rounded-2xl border border-border bg-background/50 flex items-center justify-between gap-4">
-                      <div>
-                        <p className="font-bold text-base">{c.title}</p>
-                        <p className="text-xs text-muted-foreground font-mono">{c.issuer} • {c.year}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button onClick={() => { setEditingCertId(c.id); setCertForm(c); }} className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20">
-                          <Edit3 size={16} />
-                        </button>
-                        <button onClick={() => handleDeleteCertificate(c.id)} className="p-2 rounded-lg bg-destructive/10 text-destructive hover:bg-destructive/20">
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Tab 3: Security & Direct GitHub API Sync */}
-            {activeTab === "security" && (
-              <div className="flex-1 overflow-y-auto space-y-6 pr-2 max-w-2xl mx-auto w-full py-4">
-                {/* Security Architecture Guarantee Notice */}
-                <div className="glass-panel p-6 rounded-2xl border border-emerald-500/40 bg-emerald-500/5 space-y-2 font-mono text-xs">
-                  <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
-                    <ShieldCheck size={18} />
-                    <span>SECURITY GUARANTEE: YOUR DATA &amp; TOKENS ARE 100% PROTECTED</span>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    🔒 <strong className="text-foreground">Zero Exposure to Git or Clones:</strong> Your GitHub PAT Token and Admin password are stored <strong className="text-emerald-400">exclusively on your personal device's localStorage</strong>. 
-                  </p>
-                  <ul className="list-disc pl-4 space-y-1 text-muted-foreground">
-                    <li>If someone clones your GitHub repository, your token is <strong className="text-foreground">NOT inside the code</strong> (0% exposure).</li>
-                    <li>Netlify hosting only serves compiled static assets; your token is <strong className="text-foreground">never written to Netlify builds</strong>.</li>
-                    <li>Your token only runs when YOU type it in your own browser's Admin Console on your device.</li>
-                  </ul>
-                </div>
-
-                {/* Direct GitHub API Auto-Sync Integration */}
-                <form onSubmit={handleSaveGithubToken} className="glass-panel p-6 rounded-2xl border border-primary/30 space-y-4">
-                  <div className="flex items-center gap-3 text-primary font-mono font-bold text-sm">
-                    <FolderGit2 size={20} />
-                    <span>DIRECT GITHUB REPOSITORY SYNC (AUTO-COMMIT API)</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                    Connect your GitHub repository directly to save updates automatically! Target: <span className="text-primary font-bold">https://github.com/{githubOwner}/{githubRepo}</span>
-                  </p>
-
-                  <div className="space-y-3 font-mono text-sm">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-xs text-muted-foreground mb-1 block">GITHUB USERNAME / OWNER</label>
-                        <input 
-                          type="text"
-                          placeholder="itskalpesh" 
-                          value={githubOwner}
-                          onChange={(e) => setGithubOwner(e.target.value)}
-                          className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs text-muted-foreground mb-1 block">GITHUB REPOSITORY NAME</label>
-                        <input 
-                          type="text"
-                          placeholder="kv-portfolio" 
-                          value={githubRepo}
-                          onChange={(e) => setGithubRepo(e.target.value)}
-                          className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-xs text-muted-foreground mb-1 block">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
-                      <input 
-                        type="password"
-                        autoComplete="new-password"
-                        autoCorrect="off"
-                        spellCheck={false}
-                        data-lpignore="true"
-                        data-form-type="other"
-                        placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
-                        value={githubToken}
-                        onChange={(e) => setGithubToken(e.target.value)}
-                        className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-xs font-mono"
-                      />
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 pt-1">
-                      <button type="submit" className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:opacity-90">
-                        Save GitHub Settings
-                      </button>
-                      <button 
-                        type="button" 
-                        onClick={handleSyncDirectToGitHub}
-                        className="bg-emerald-500 text-white font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:opacity-90 flex items-center gap-2"
-                      >
-                        <Sparkles size={14} /> 1-Click Commit Direct to GitHub
-                      </button>
-                    </div>
-                  </div>
-                </form>
-
-                {/* Admin Credentials */}
-                <form onSubmit={handleChangeCredentials} className="glass-panel p-6 rounded-2xl border border-accent/30 space-y-4">
-                  <div className="flex items-center gap-3 text-accent font-mono font-bold text-sm">
-                    <KeyRound size={20} />
-                    <span>UPDATE ADMIN CREDENTIALS</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono">
-                    Updates your local admin username and password. Saved securely in obfuscated storage.
-                  </p>
-
-                  <div className="space-y-4 font-mono text-sm">
-                    <div>
-                      <label className="text-xs text-muted-foreground mb-1 block">NEW USERNAME</label>
-                      <input 
-                        type="text"
-                        autoComplete="new-password"
-                        autoCorrect="off"
-                        spellCheck={false}
-                        data-lpignore="true"
-                        data-form-type="other"
-                        placeholder="Enter new username" 
-                        value={newUsername}
-                        onChange={(e) => setNewUsername(e.target.value)}
-                        className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-accent"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-xs text-muted-foreground mb-1 block">NEW PASSWORD</label>
-                      <input 
-                        type="password"
-                        autoComplete="new-password"
-                        autoCorrect="off"
-                        spellCheck={false}
-                        data-lpignore="true"
-                        data-form-type="other"
-                        placeholder="Enter new password" 
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        className="w-full bg-background border border-border px-4 py-2.5 rounded-xl outline-none focus:border-accent"
-                      />
-                    </div>
-
-                    <button type="submit" className="w-full bg-accent text-accent-foreground font-mono font-bold py-3 rounded-xl uppercase tracking-wider hover:opacity-90 transition-opacity">
-                      Update Security Pass
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-
-            {/* Tab 4: AI Voice Engine Customizer */}
-            {activeTab === "voice" && (
-              <div className="flex-1 overflow-y-auto space-y-6 pr-2 max-w-2xl mx-auto w-full py-4">
-                <div className="glass-panel p-6 rounded-2xl border border-primary/30 space-y-5">
-                  <div className="flex items-center gap-3 text-primary font-mono font-bold text-sm">
-                    <Bot size={20} />
-                    <span>KV-AI VOICE SYNTHESIZER CUSTOMIZER</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                    Customize the voice model, pitch, and speaking speed for your 3D Draggable AI Copilot (<span className="text-primary font-bold">KV-AI</span>). Select your preferred system voice below and test it live!
-                  </p>
-
-                  {/* Voice Selection Dropdown */}
-                  <div className="space-y-4 font-mono text-xs">
-                    <div>
-                      <label className="text-muted-foreground mb-1 block font-bold">SELECT AI VOICE MODEL ({availableVoices.length} Available)</label>
-                      <select 
-                        value={selectedVoiceURI} 
-                        onChange={(e) => setSelectedVoiceURI(e.target.value)}
-                        className="w-full bg-background border border-border px-4 py-3 rounded-xl outline-none focus:border-primary font-mono text-xs text-foreground"
-                      >
-                        {availableVoices.map((v) => (
-                          <option key={v.voiceURI} value={v.voiceURI}>
-                            {v.name} ({v.lang})
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Pitch Slider */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold">
-                        <span className="text-muted-foreground">VOICE PITCH:</span>
-                        <span className="text-primary">{voicePitch.toFixed(2)} ({voicePitch < 0.8 ? "Robotic Low" : voicePitch > 1.2 ? "High Cyber" : "Natural Medium"})</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="0.5" 
-                        max="1.8" 
-                        step="0.05" 
-                        value={voicePitch} 
-                        onChange={(e) => setVoicePitch(parseFloat(e.target.value))}
-                        className="w-full accent-primary cursor-pointer"
-                      />
-                    </div>
-
-                    {/* Rate Slider */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold">
-                        <span className="text-muted-foreground">SPEAKING SPEED (RATE):</span>
-                        <span className="text-accent">{voiceRate.toFixed(2)}x ({voiceRate < 0.9 ? "Slow & Steady" : voiceRate > 1.2 ? "Fast Execution" : "Normal"})</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="0.5" 
-                        max="1.8" 
-                        step="0.05" 
-                        value={voiceRate} 
-                        onChange={(e) => setVoiceRate(parseFloat(e.target.value))}
-                        className="w-full accent-accent cursor-pointer"
-                      />
-                    </div>
-
-                    {/* Buttons: Test Voice Sample & Save Preferences */}
-                    <div className="flex flex-wrap gap-3 pt-2">
-                      <button 
-                        type="button" 
-                        onClick={handleTestVoiceSample}
-                        className="bg-primary/20 text-primary border border-primary/40 font-mono font-bold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-primary/30 flex items-center gap-2"
-                      >
-                        <Volume2 size={16} /> Test Voice Sample 🔊
-                      </button>
-
-                      <button 
-                        type="button" 
-                        onClick={handleSaveVoiceSettings}
-                        className="bg-primary text-primary-foreground font-mono font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider hover:opacity-90 flex items-center gap-2 shadow-lg"
-                      >
-                        <Check size={16} /> Save Voice Preference 💾
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </DialogContent>
-    </Dialog>
-  );
-}
-
 // ---------------- Autonomous Web AI Copilot Assistant ---------------- //
 interface ChatMessage {
   id: string;
@@ -3148,12 +2174,12 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-28 left-6 sm:left-8 z-50 w-[90vw] sm:w-[400px] max-h-[540px] rounded-3xl glass-panel border border-primary/40 bg-black/90 text-foreground flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden touch-none"
+            className="fixed bottom-28 left-6 sm:left-8 z-50 w-[90vw] sm:w-[400px] max-h-[540px] rounded-3xl border border-primary/40 bg-[#090d16] text-foreground flex flex-col shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-hidden touch-none"
           >
             {/* Header (Drag Handle to move chat box anywhere) */}
             <div 
               onPointerDown={(e) => panelDragControls.start(e)}
-              className="p-4 border-b border-primary/30 flex items-center justify-between bg-primary/10 cursor-grab active:cursor-grabbing select-none"
+              className="p-4 border-b border-primary/30 flex items-center justify-between bg-[#111827] cursor-grab active:cursor-grabbing select-none"
               title="Hold & Drag to move AI Chat Panel anywhere on screen"
             >
               <div className="flex items-center gap-2.5">
@@ -3187,7 +2213,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
             </div>
 
             {/* Quick Action Chips */}
-            <div className="px-4 py-2 border-b border-border/40 flex gap-2 overflow-x-auto no-scrollbar bg-secondary/30">
+            <div className="px-3.5 py-2.5 border-b border-slate-800 flex items-center gap-2 overflow-x-auto no-scrollbar bg-[#0f172a] shrink-0">
               {[
                 { label: "🚀 Study Notes Site", text: "Open Study Notes project" },
                 { label: "📜 Certificates", text: "Show certificates" },
@@ -3200,7 +2226,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
                     setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: chip.text }]);
                     setTimeout(() => processQuery(chip.text), 300);
                   }}
-                  className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-background/80 border border-primary/30 text-primary whitespace-nowrap hover:bg-primary/20 transition-colors"
+                  className="px-3 py-1.5 rounded-full text-[11px] font-mono bg-[#1e293b] border border-primary/40 text-primary whitespace-nowrap hover:bg-primary/20 hover:border-primary transition-all shrink-0 inline-flex items-center justify-center leading-none"
                 >
                   {chip.label}
                 </button>
@@ -3208,7 +2234,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
             </div>
 
             {/* Chat Body */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 font-sans text-xs">
+            <div className="flex-1 p-4 overflow-y-auto space-y-3 font-sans text-xs bg-[#090d16]">
               {messages.map((msg) => (
                 <div key={msg.id} className={cn("flex flex-col", msg.sender === "user" ? "items-end" : "items-start")}>
                   <div
@@ -3216,7 +2242,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
                       "max-w-[85%] px-4 py-3 rounded-2xl leading-relaxed shadow-sm font-medium",
                       msg.sender === "user"
                         ? "bg-primary text-primary-foreground font-mono rounded-br-none"
-                        : "bg-muted/80 text-foreground border border-border/60 rounded-bl-none font-mono"
+                        : "bg-[#111827] text-slate-100 border border-slate-800 rounded-bl-none font-mono"
                     )}
                   >
                     {msg.text}
@@ -3236,7 +2262,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
             </div>
 
             {/* Input Form with Voice Mic */}
-            <form onSubmit={handleSend} className="p-3 border-t border-border/60 flex items-center gap-2 bg-background/50">
+            <form onSubmit={handleSend} className="p-3 border-t border-slate-800 flex items-center gap-2 bg-[#111827]">
               <button
                 type="button"
                 onClick={toggleVoiceInput}
@@ -3254,7 +2280,7 @@ function AICopilot({ scrollTo, projects, certificates }: { scrollTo: (id: string
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={isListening ? "Listening to your voice..." : "Type or speak commands..."}
-                className="flex-1 bg-background border border-border px-3.5 py-2.5 rounded-xl text-xs outline-none focus:border-primary font-mono"
+                className="flex-1 bg-[#090d16] border border-slate-700 text-slate-100 placeholder:text-slate-500 px-3.5 py-2.5 rounded-xl text-xs outline-none focus:border-primary font-mono"
               />
               
               <button
