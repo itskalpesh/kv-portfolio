@@ -120,6 +120,6 @@ artifacts/portfolio/dist/public
 **Kalpesh Kurbetti**  
 Nipani, Karnataka, India  
 
-- Email: kurbettikalpesh2003@gmail.com
+- Email: kalpeshkurbetti1301@gmail.com
 - GitHub: [itskalpesh](https://github.com/itskalpesh)
 - Instagram: [kv.coder](https://www.instagram.com/kv.coder/)
